@@ -7,6 +7,9 @@ public class CameraController : MonoBehaviour
     [Header("Move")]
     [SerializeField] private float moveSpeed;
 
+    [SerializeField] private Transform cornerMin;
+    [SerializeField] private Transform cornerMax;
+
     [SerializeField] private float xInput;
     [SerializeField] private float zInput;
 
@@ -42,5 +45,17 @@ public class CameraController : MonoBehaviour
         Vector3 dir = (transform.forward * zInput) + (transform.right * xInput);
 
         transform.position += moveSpeed * Time.deltaTime * dir;
+        transform.position = Clamp(cornerMin.position, cornerMax.position);
+    }
+
+    private Vector3 Clamp(Vector3 lowerLeft, Vector3 topRight)
+    {
+        var pos = new Vector3(
+            Mathf.Clamp(transform.position.x, lowerLeft.x, topRight.x),
+            transform.position.y,
+            Mathf.Clamp(transform.position.z, lowerLeft.z, topRight.z)
+            );
+
+        return pos;
     }
 }
