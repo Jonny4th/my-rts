@@ -13,6 +13,15 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float xInput;
     [SerializeField] private float zInput;
 
+    [Header("Zoom")]
+    [SerializeField] private float zoomSpeed;
+    [SerializeField] private float zoomModifier;
+
+    [SerializeField] private float minZoomDist;
+    [SerializeField] private float maxZoomDist;
+
+    [SerializeField] private float dist; //between camera base and camera
+
     public static CameraController instance;
 
     void Awake()
@@ -30,11 +39,16 @@ public class CameraController : MonoBehaviour
     private void Start()
     {
         moveSpeed = 50;
+
+        zoomSpeed = 25;
+        minZoomDist = 15;
+        maxZoomDist = 100;
     }
 
     private void Update()
     {
         MoveByKeyboard();
+        Zoom();
     }
 
     private void MoveByKeyboard()
@@ -57,5 +71,23 @@ public class CameraController : MonoBehaviour
             );
 
         return pos;
+    }
+
+    private void Zoom()
+    {
+        zoomModifier = Input.GetAxis("Mouse ScrollWheel");
+        if (Input.GetKey(KeyCode.Z))
+            zoomModifier = 0.01f;
+        if (Input.GetKey(KeyCode.X))
+            zoomModifier = -0.01f;
+
+        dist = Vector3.Distance(transform.position, cam.transform.position);
+
+        if (dist < minZoomDist && zoomModifier > 0f)
+            return; //too close
+        else if (dist > maxZoomDist && zoomModifier < 0f)
+            return; //too far
+
+        cam.transform.position += zoomModifier * zoomSpeed * cam.transform.forward;
     }
 }
