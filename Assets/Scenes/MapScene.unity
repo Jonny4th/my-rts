@@ -465,6 +465,13 @@ MonoBehaviour:
   cornerMax: {fileID: 1696540699}
   xInput: 0
   zInput: 0
+  zoomSpeed: 0
+  zoomModifier: 0
+  minZoomDist: 0
+  maxZoomDist: 0
+  dist: 0
+  rotationAmount: 0.25
+  newRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &1125203193
 GameObject:
   m_ObjectHideFlags: 0

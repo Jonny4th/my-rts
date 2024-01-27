@@ -22,13 +22,17 @@ public class CameraController : MonoBehaviour
 
     [SerializeField] private float dist; //between camera base and camera
 
+    [Header("Rotation")]
+    [SerializeField] private float rotationAmount;
+    [SerializeField] private Quaternion newRotation;
+
     public static CameraController instance;
 
     void Awake()
     {
         if (instance != null)
         {
-            Destroy(gameObject); 
+            Destroy(gameObject);
             return;
         }
 
@@ -43,12 +47,16 @@ public class CameraController : MonoBehaviour
         zoomSpeed = 25;
         minZoomDist = 15;
         maxZoomDist = 100;
+
+        rotationAmount = 0.25f;
+        newRotation = transform.rotation;
     }
 
     private void Update()
     {
         MoveByKeyboard();
         Zoom();
+        Rotate();
     }
 
     private void MoveByKeyboard()
@@ -89,5 +97,20 @@ public class CameraController : MonoBehaviour
             return; //too far
 
         cam.transform.position += zoomModifier * zoomSpeed * cam.transform.forward;
+    }
+
+    private void Rotate()
+    {
+        if (Input.GetKey(KeyCode.Q))
+        {
+            newRotation *= Quaternion.Euler(rotationAmount * Vector3.up);
+        }
+
+        if (Input.GetKey(KeyCode.E))
+        {
+            newRotation *= Quaternion.Euler(-rotationAmount * Vector3.up);
+        }
+
+        transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, Time.deltaTime * moveSpeed);
     }
 }
