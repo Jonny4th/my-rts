@@ -74,4 +74,12 @@ public class Unit : MonoBehaviour
     {
         
     }
+
+    public void ToggleSelectionVisual(bool flag)
+    {
+        if(SelectionVisual != null)
+        {
+            SelectionVisual.SetActive(flag);
+        }
+    }
 }
