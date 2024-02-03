@@ -1,9 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MainUI : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject selectionMarker;
+    public GameObject SelectionMarker { get => selectionMarker; }
+
     public static MainUI instance;
 
     private void Awake()
@@ -16,12 +18,12 @@ public class MainUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
