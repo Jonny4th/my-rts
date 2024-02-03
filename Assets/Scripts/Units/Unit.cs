@@ -65,8 +65,6 @@ namespace MyGame.Core
         private NavMeshAgent navAgent;
         public NavMeshAgent NavAgent { get { return navAgent; } }
 
-        public Moveable MoveFunction { get; private set; }
-
         [SerializeField] private Faction faction;
 
         [Header("Info")]
