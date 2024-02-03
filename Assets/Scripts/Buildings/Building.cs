@@ -85,6 +85,7 @@ namespace MyGame.Core
 
         void Update()
         {
+            //test
             if (Input.GetKeyDown(KeyCode.G))
                 ToCreateUnit(0);
 
