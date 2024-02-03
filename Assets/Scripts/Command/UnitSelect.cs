@@ -1,3 +1,4 @@
+using MyGame.Unit;
 using UnityEngine;
 
 public class UnitSelect : MonoBehaviour
@@ -8,6 +9,8 @@ public class UnitSelect : MonoBehaviour
     [SerializeField]
     private Unit curUnit; //current selected single unit
     public Unit CurUnit { get { return curUnit; } }
+
+    private Selectable select;
 
     private Camera cam;
     private Faction faction;
@@ -49,10 +52,9 @@ public class UnitSelect : MonoBehaviour
     private void SelectUnit(RaycastHit hit)
     {
         curUnit = hit.collider.GetComponent<Unit>();
-        //currentSelection = hit.collider.GetComponent<ISelectable>();
-        //currentSelection.ToggleSelectionVisual(true);
 
-        curUnit.ToggleSelectionVisual(true);
+        select = hit.collider.GetComponent<Selectable>();
+        select.ToggleSelectionVisual(true);
 
         Debug.Log("Selected Unit");
     }
@@ -75,13 +77,14 @@ public class UnitSelect : MonoBehaviour
 
     private void ClearAllSelectionVisual()
     {
-        if (curUnit != null)
-            curUnit.ToggleSelectionVisual(false);
+        if (select != null)
+            select.ToggleSelectionVisual(false);
     }
 
     private void ClearEverything()
     {
         ClearAllSelectionVisual();
         curUnit = null;
+        select = null;
     }
 }
