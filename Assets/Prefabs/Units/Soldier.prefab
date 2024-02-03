@@ -5274,7 +5274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  unitName: 
+  unitName: Soldier
   unitPic: {fileID: 0}
   curHP: 0
   maxHP: 100

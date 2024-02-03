@@ -1790,6 +1790,14 @@ PrefabInstance:
       propertyPath: faction
       value: 
       objectReference: {fileID: 885441555}
+    - target: {fileID: 507621588477163035, guid: 1c547e7f1b6bccb4687877efea9e9320, type: 3}
+      propertyPath: unitPrefabs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 507621588477163035, guid: 1c547e7f1b6bccb4687877efea9e9320, type: 3}
+      propertyPath: unitPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 8794366943947153485, guid: c3ca278bfd553234b9477d8752b17b75, type: 3}
     - target: {fileID: 5002861235866514344, guid: 1c547e7f1b6bccb4687877efea9e9320, type: 3}
       propertyPath: m_Name
       value: HeadQuarter

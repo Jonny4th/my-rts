@@ -86,8 +86,11 @@ namespace MyGame.Core
         void Update()
         {
             //test
-            if (Input.GetKeyDown(KeyCode.G))
+            if (Input.GetKeyDown(KeyCode.Alpha1))
                 ToCreateUnit(0);
+
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+                ToCreateUnit(1);
 
             if ((recruitList.Count > 0) && (recruitList[0] != null))
             {
