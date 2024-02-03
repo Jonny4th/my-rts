@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,6 +10,15 @@ namespace MyGame.Core
         Move,
         Attack,
         Die
+    }
+
+    [Serializable]
+    public struct UnitCost
+    {
+        public int food;
+        public int wood;
+        public int gold;
+        public int stone;
     }
 
     [RequireComponent(typeof(NavMeshAgent))]
@@ -55,7 +65,17 @@ namespace MyGame.Core
         private NavMeshAgent navAgent;
         public NavMeshAgent NavAgent { get { return navAgent; } }
 
+        public Moveable MoveFunction { get; private set; }
+
         [SerializeField] private Faction faction;
+
+        [Header("Info")]
+        [SerializeField] private UnitCost unitCost;
+        public UnitCost UnitCost { get { return unitCost; } }
+
+        //time for increasing progress 1% for this unit, less is faster
+        [SerializeField] private float unitWaitTime = 0.1f;
+        public float UnitWaitTime { get { return unitWaitTime; } }
 
         void Awake()
         {
@@ -89,6 +109,7 @@ namespace MyGame.Core
                 navAgent.ResetPath();
             }
         }
+
         public void MoveToPosition(Vector3 dest)
         {
             if (navAgent != null)

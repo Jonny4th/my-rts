@@ -1,3 +1,5 @@
+using MyGame.Core;
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum Nation
@@ -29,6 +31,13 @@ public class Faction : MonoBehaviour
     [SerializeField] private int stone;
     public int Stone { get => stone; set => stone = value; }
 
+    [SerializeField] private List<Unit> aliveUnits = new List<Unit>();
+    public List<Unit> AliveUnits { get => aliveUnits; }
+
+    [SerializeField] private List<Building> aliveBuildings = new();
+    public List<Building> AliveBuildings { get => aliveBuildings; }
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,4 +49,40 @@ public class Faction : MonoBehaviour
     {
 
     }
+
+    public bool CheckUnitCost(Unit unit)
+    {
+        if (food < unit.UnitCost.food)
+            return false;
+
+        if (wood < unit.UnitCost.wood)
+            return false;
+
+        if (gold < unit.UnitCost.gold)
+            return false;
+
+        if (stone < unit.UnitCost.stone)
+            return false;
+
+        return true;
+    }
+
+    public void DeductUnitCost(Unit unit)
+    {
+        food -= unit.UnitCost.food;
+        wood -= unit.UnitCost.wood;
+        gold -= unit.UnitCost.gold;
+        stone -= unit.UnitCost.stone;
+    }
+
+    public bool IsMyUnit(Unit u)
+    {
+        return aliveUnits.Contains(u);
+    }
+
+    public bool IsMyBuilding(Building b)
+    {
+        return aliveBuildings.Contains(b);
+    }
+
 }

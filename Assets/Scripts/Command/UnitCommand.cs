@@ -47,10 +47,9 @@ namespace MyGame.Core.Inputs
         private void TryCommand(Vector2 screenPos)
         {
             Ray ray = cam.ScreenPointToRay(screenPos);
-            RaycastHit hit;
 
             //if we left-click something
-            if (Physics.Raycast(ray, out hit, 1000, layerMask))
+            if (Physics.Raycast(ray, out RaycastHit hit, 1000, layerMask))
             {
                 switch (hit.collider.tag)
                 {
