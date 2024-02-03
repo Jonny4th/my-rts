@@ -1,4 +1,4 @@
-using MyGame.Unit;
+using MyGame.Core;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator), typeof(Unit))]

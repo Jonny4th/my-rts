@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace MyGame.Unit
+namespace MyGame.Core
 {
     public enum UnitState
     {
@@ -71,7 +71,12 @@ namespace MyGame.Unit
         // Update is called once per frame
         void Update()
         {
-
+            switch (state)
+            {
+                case UnitState.Move:
+                    MoveUpdate();
+                    break;
+            }
         }
 
         public void SetState(UnitState toState)

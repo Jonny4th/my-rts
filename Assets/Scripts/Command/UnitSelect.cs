@@ -1,90 +1,93 @@
-using MyGame.Unit;
+using MyGame.Core;
 using UnityEngine;
 
-public class UnitSelect : MonoBehaviour
+namespace MyGame.Core.Inputs
 {
-    [SerializeField]
-    private LayerMask layerMask;
-
-    [SerializeField]
-    private Unit curUnit; //current selected single unit
-    public Unit CurUnit { get { return curUnit; } }
-
-    private Selectable select;
-
-    private Camera cam;
-    private Faction faction;
-
-    public static UnitSelect instance;
-
-    #region Mono
-    void Awake()
+    public class UnitSelect : MonoBehaviour
     {
-        faction = GetComponent<Faction>();
-    }
+        [SerializeField]
+        private LayerMask layerMask;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        cam = Camera.main;
-        layerMask = LayerMask.GetMask("Unit", "Building", "Resource", "Ground");
+        [SerializeField]
+        private Unit curUnit; //current selected single unit
+        public Unit CurUnit { get { return curUnit; } }
 
-        if (instance != null) Destroy(this);
-        instance = this;
-    }
+        private Selectable select;
 
-    void Update()
-    {
-        //mouse down
-        if (Input.GetMouseButtonDown(0))
+        private Camera cam;
+        private Faction faction;
+
+        public static UnitSelect instance;
+
+        #region Mono
+        void Awake()
         {
-            ClearEverything();
+            faction = GetComponent<Faction>();
         }
 
-        // mouse up
-        if (Input.GetMouseButtonUp(0))
+        // Start is called before the first frame update
+        void Start()
         {
-            TrySelect(Input.mousePosition);
+            cam = Camera.main;
+            layerMask = LayerMask.GetMask("Unit", "Building", "Resource", "Ground");
+
+            if (instance != null) Destroy(this);
+            instance = this;
         }
-    }
-    #endregion
 
-    private void SelectUnit(RaycastHit hit)
-    {
-        curUnit = hit.collider.GetComponent<Unit>();
-
-        select = hit.collider.GetComponent<Selectable>();
-        select.ToggleSelectionVisual(true);
-
-        Debug.Log("Selected Unit");
-    }
-
-    private void TrySelect(Vector2 screenPos)
-    {
-        Ray ray = cam.ScreenPointToRay(screenPos);
-
-        //if we left-click something
-        if (Physics.Raycast(ray, out RaycastHit hit, 1000, layerMask))
+        void Update()
         {
-            switch (hit.collider.tag)
+            //mouse down
+            if (Input.GetMouseButtonDown(0))
             {
-                case "Unit":
-                    SelectUnit(hit);
-                    break;
+                ClearEverything();
+            }
+
+            // mouse up
+            if (Input.GetMouseButtonUp(0))
+            {
+                TrySelect(Input.mousePosition);
             }
         }
-    }
+        #endregion
 
-    private void ClearAllSelectionVisual()
-    {
-        if (select != null)
-            select.ToggleSelectionVisual(false);
-    }
+        private void SelectUnit(RaycastHit hit)
+        {
+            curUnit = hit.collider.GetComponent<Unit>();
 
-    private void ClearEverything()
-    {
-        ClearAllSelectionVisual();
-        curUnit = null;
-        select = null;
+            select = hit.collider.GetComponent<Selectable>();
+            select.ToggleSelectionVisual(true);
+
+            Debug.Log("Selected Unit");
+        }
+
+        private void TrySelect(Vector2 screenPos)
+        {
+            Ray ray = cam.ScreenPointToRay(screenPos);
+
+            //if we left-click something
+            if (Physics.Raycast(ray, out RaycastHit hit, 1000, layerMask))
+            {
+                switch (hit.collider.tag)
+                {
+                    case "Unit":
+                        SelectUnit(hit);
+                        break;
+                }
+            }
+        }
+
+        private void ClearAllSelectionVisual()
+        {
+            if (select != null)
+                select.ToggleSelectionVisual(false);
+        }
+
+        private void ClearEverything()
+        {
+            ClearAllSelectionVisual();
+            curUnit = null;
+            select = null;
+        }
     }
 }
