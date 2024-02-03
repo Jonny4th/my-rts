@@ -5140,8 +5140,8 @@ GameObject:
   - component: {fileID: 9571380}
   - component: {fileID: 5611610181527795358}
   - component: {fileID: 7111426986687023805}
-  - component: {fileID: 5669167237727491191}
   - component: {fileID: 4191647433676397667}
+  - component: {fileID: 5669167237727491191}
   m_Layer: 6
   m_Name: Soldier
   m_TagString: Unit
@@ -5247,6 +5247,18 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &4191647433676397667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 305fe5f47ab87af46a2e08063a4346ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5669167237727491191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5273,18 +5285,6 @@ MonoBehaviour:
   state: 0
   faction: {fileID: 0}
   selectionVisual: {fileID: 1605079031438591564}
---- !u!114 &4191647433676397667
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 186328}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 305fe5f47ab87af46a2e08063a4346ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &186630
 GameObject:
   m_ObjectHideFlags: 0

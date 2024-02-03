@@ -55,6 +55,7 @@ public class Unit : MonoBehaviour
 
     [SerializeField] private Faction faction;
 
+    [Header("UI")]
     [SerializeField] private GameObject selectionVisual;
     public GameObject SelectionVisual { get { return selectionVisual; } }
 

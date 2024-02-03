@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f5210280e32e7543a47ee1a8c811641, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nation: 0
+  nation: 2
   food: 0
   wood: 0
   gold: 0
