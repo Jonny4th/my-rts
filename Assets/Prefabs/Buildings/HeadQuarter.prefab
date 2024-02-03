@@ -71,6 +71,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5172617868741597518}
+  - component: {fileID: 507621588477163035}
   m_Layer: 0
   m_Name: HeadQuarter
   m_TagString: Untagged
@@ -96,6 +97,32 @@ Transform:
   - {fileID: 3392556077949287817}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &507621588477163035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5002861235866514344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 665017dabfffa6144b521e9059f62a8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  structureName: 
+  structurePic: {fileID: 0}
+  curHP: 0
+  maxHP: 0
+  faction: {fileID: 0}
+  selectionVisual: {fileID: 0}
+  spawnPoint: {fileID: 7759304939587760958}
+  rallyPoint: {fileID: 3392556077949287817}
+  unitPrefabs:
+  - {fileID: 186328, guid: a7c14d10f5f1bba469892db01a9b73ed, type: 3}
+  recruitList: []
+  unitTimer: 0
+  curUnitProgress: 0
+  curUnitWaitTime: 0
 --- !u!1 &8462488055529012805
 GameObject:
   m_ObjectHideFlags: 0
