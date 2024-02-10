@@ -1,4 +1,5 @@
 using MyGame.Core;
+using MyGame.Core.Managers;
 using UnityEngine;
 
 namespace MyGame.Core.Inputs
@@ -59,6 +60,11 @@ namespace MyGame.Core.Inputs
             select.ToggleSelectionVisual(true);
 
             Debug.Log("Selected Unit");
+
+            if(GameManager.instance.MyFaction.IsMyUnit(curUnit))
+            {
+                ShowUnit(curUnit);
+            }
         }
 
         private void TrySelect(Vector2 screenPos)
@@ -88,6 +94,13 @@ namespace MyGame.Core.Inputs
             ClearAllSelectionVisual();
             curUnit = null;
             select = null;
+
+            InfoManager.instance.ClearAllInfo();
+        }
+
+        private void ShowUnit(Unit u)
+        {
+            InfoManager.instance.ShowAllInfo(u);
         }
     }
 }
