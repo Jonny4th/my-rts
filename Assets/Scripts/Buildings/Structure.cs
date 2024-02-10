@@ -23,7 +23,7 @@ namespace MyGame.Core
         protected Faction faction;
 
         [SerializeField]
-        protected GameObject selectionVisual;
-        public GameObject SelectionVisual { get { return selectionVisual; } }
+        protected Selectable selectionVisual;
+        public Selectable SelectionVisual { get { return selectionVisual; } }
     }
 }

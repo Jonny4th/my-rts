@@ -1,6 +1,6 @@
-using MyGame.Core;
 using MyGame.Core.Managers;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace MyGame.Core.Inputs
 {
@@ -12,6 +12,10 @@ namespace MyGame.Core.Inputs
         [SerializeField]
         private Unit curUnit; //current selected single unit
         public Unit CurUnit { get { return curUnit; } }
+
+        [SerializeField]
+        private Building curBuilding;
+        public Building CurBuilding { get { return curBuilding; } }
 
         private Selectable select;
 
@@ -41,6 +45,8 @@ namespace MyGame.Core.Inputs
             //mouse down
             if (Input.GetMouseButtonDown(0))
             {
+                if (EventSystem.current.IsPointerOverGameObject()) return;
+
                 ClearEverything();
             }
 
@@ -59,11 +65,22 @@ namespace MyGame.Core.Inputs
             select = hit.collider.GetComponent<Selectable>();
             select.ToggleSelectionVisual(true);
 
-            Debug.Log("Selected Unit");
-
-            if(GameManager.instance.MyFaction.IsMyUnit(curUnit))
+            if (GameManager.instance.MyFaction.IsMyUnit(curUnit))
             {
                 ShowUnit(curUnit);
+            }
+        }
+
+        private void SelectBuilding(RaycastHit hit)
+        {
+            curBuilding = hit.collider.GetComponent<Building>();
+
+            select = curBuilding.SelectionVisual;
+            select.ToggleSelectionVisual(true);
+
+            if (GameManager.instance.MyFaction.IsMyBuilding(curBuilding))
+            {
+                ShowBuilding(curBuilding);//Show building info
             }
         }
 
@@ -79,6 +96,9 @@ namespace MyGame.Core.Inputs
                     case "Unit":
                         SelectUnit(hit);
                         break;
+                    case "Building":
+                        SelectBuilding(hit);
+                        break;
                 }
             }
         }
@@ -93,6 +113,7 @@ namespace MyGame.Core.Inputs
         {
             ClearAllSelectionVisual();
             curUnit = null;
+            curBuilding = null;
             select = null;
 
             InfoManager.instance.ClearAllInfo();
@@ -101,6 +122,11 @@ namespace MyGame.Core.Inputs
         private void ShowUnit(Unit u)
         {
             InfoManager.instance.ShowAllInfo(u);
+        }
+
+        private void ShowBuilding(Building b)
+        {
+            InfoManager.instance.ShowAllInfo(b);
         }
     }
 }

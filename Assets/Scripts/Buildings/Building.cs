@@ -80,7 +80,7 @@ namespace MyGame.Core
         public void ToggleSelectionVisual(bool flag)
         {
             if (SelectionVisual != null)
-                SelectionVisual.SetActive(flag);
+                SelectionVisual.ToggleSelectionVisual(flag);
         }
 
         void Update()
