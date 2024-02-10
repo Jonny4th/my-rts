@@ -68,6 +68,7 @@ MonoBehaviour:
   unitTimer: 0
   curUnitProgress: 0
   curUnitWaitTime: 0
+  isFunctional: 0
 --- !u!114 &7822501949337537722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,8 +101,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 6.0074935, y: 3.1604874, z: 5.9564114}
-  m_Center: {x: -0.0056607723, y: 1.6097747, z: -0.021181107}
+  m_Size: {x: 6.0074935, y: 0.862208, z: 5.9564114}
+  m_Center: {x: -0.0056607723, y: 0.460635, z: -0.021181107}
 --- !u!208 &7469177501690645108
 NavMeshObstacle:
   m_ObjectHideFlags: 0

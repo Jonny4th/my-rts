@@ -42,13 +42,6 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
-        moveSpeed = 50;
-
-        zoomSpeed = 25;
-        minZoomDist = 15;
-        maxZoomDist = 100;
-
-        rotationAmount = 0.25f;
         newRotation = transform.rotation;
     }
 

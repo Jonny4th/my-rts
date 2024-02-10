@@ -4502,10 +4502,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 885441555}
     - target: {fileID: 507621588477163035, guid: 1c547e7f1b6bccb4687877efea9e9320, type: 3}
-      propertyPath: isFunctional
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 507621588477163035, guid: 1c547e7f1b6bccb4687877efea9e9320, type: 3}
       propertyPath: unitPrefabs.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -4827,15 +4823,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 963194227}
-  moveSpeed: 0
+  moveSpeed: 50
   cornerMin: {fileID: 661457386}
   cornerMax: {fileID: 1696540699}
   xInput: 0
   zInput: 0
-  zoomSpeed: 0
+  zoomSpeed: 25
   zoomModifier: 0
-  minZoomDist: 0
-  maxZoomDist: 0
+  minZoomDist: 15
+  maxZoomDist: 100
   dist: 0
   rotationAmount: 0.25
   newRotation: {x: 0, y: 0, z: 0, w: 0}

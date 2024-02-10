@@ -128,7 +128,7 @@ MonoBehaviour:
   unitTimer: 0
   curUnitProgress: 0
   curUnitWaitTime: 0
-  isFunctional: 0
+  isFunctional: 1
 --- !u!65 &1812802566704589513
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -148,8 +148,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 23.218958, y: 10, z: 23.069305}
-  m_Center: {x: 0.023219109, y: 5, z: -0.120294094}
+  m_Size: {x: 21.693764, y: 1.5358777, z: 21.95754}
+  m_Center: {x: 0.012496948, y: 0.76793885, z: 0.09363651}
 --- !u!54 &3717414103147682093
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -463,7 +463,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5870612346050389625, guid: dd8aa270b9996304d82bb9f4c6726242, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
