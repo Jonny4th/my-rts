@@ -107,6 +107,8 @@ namespace MyGame.Core.Inputs
         {
             if (select != null)
                 select.ToggleSelectionVisual(false);
+
+            ActionManager.instance.ClearAllInfo();
         }
 
         private void ClearEverything()
@@ -127,6 +129,7 @@ namespace MyGame.Core.Inputs
         private void ShowBuilding(Building b)
         {
             InfoManager.instance.ShowAllInfo(b);
+            ActionManager.instance.ShowCreateUnitMode(b);
         }
     }
 }
