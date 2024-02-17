@@ -11,14 +11,18 @@ public class FindBuildingSite : MonoBehaviour
     [SerializeField]
     private MeshRenderer planeRdr;
 
+    private readonly Color32 GhostGreen = new Color32(0, 255, 0, 100);
+    private readonly Color32 GhostRed = new Color32(255, 0, 0, 100);
+
+
     void Start()
     {
         //Setup Building Color
         for (int i = 0; i < modelRdr.Length; i++)
-            modelRdr[i].material.color = Color.green;
+            modelRdr[i].material.color = GhostGreen;
 
         //Setup Plane Color
-        planeRdr.material.color = Color.green;
+        planeRdr.material.color = GhostGreen;
 
         CanBuild = true;
     }
@@ -28,17 +32,17 @@ public class FindBuildingSite : MonoBehaviour
         if (flag)
         {
             for (int i = 0; i < modelRdr.Length; i++)
-                modelRdr[i].material.color = Color.green;
+                modelRdr[i].material.color = new Color32(0, 255, 0, 50);
 
-            planeRdr.material.color = Color.green;
+            planeRdr.material.color = GhostGreen;
             canBuild = true;
         }
         else
         {
             for (int i = 0; i < modelRdr.Length; i++)
-                modelRdr[i].material.color = Color.red;
+                modelRdr[i].material.color = GhostRed;
 
-            planeRdr.material.color = Color.red;
+            planeRdr.material.color = GhostRed;
             canBuild = false;
         }
     }
