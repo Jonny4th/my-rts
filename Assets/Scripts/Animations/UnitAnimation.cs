@@ -26,7 +26,11 @@ public class UnitAnimation : MonoBehaviour
         anim.SetBool("IsIdle", false);
         anim.SetBool("IsMove", false);
         anim.SetBool("IsAttack", false);
-        anim.SetBool("IsBuild", false);
+
+        if(unit.IsBuilder)
+        {
+            anim.SetBool("IsBuild", false);
+        }
         //can we use trigger instead?
 
         switch(unit.State)
@@ -34,7 +38,8 @@ public class UnitAnimation : MonoBehaviour
             case UnitState.Idle:
                 anim.SetBool("IsIdle", true);
                 break;
-            case UnitState.Move or UnitState.MoveToBuild:
+            case UnitState.Move:
+            case UnitState.MoveToBuild:
                 anim.SetBool("IsMove", true);
                 break;
             case UnitState.Attack:

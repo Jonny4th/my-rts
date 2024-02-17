@@ -139,6 +139,5 @@ namespace MyGame.Core
 
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
         }
-
     }
 }
