@@ -52,9 +52,7 @@ public class ActionManager : MonoBehaviour
             {
                 unitBtns[i].gameObject.SetActive(true);
                 Unit unit = b.UnitPrefabs[i].GetComponent<Unit>();
-                Debug.Log($"{i} ui {unitBtns[i].name} name {unit.UnitPic.name} id {unit.ID}");
                 unitBtns[i].image.sprite = unit.UnitPic;
-                Debug.Log(unitBtns[i].image.sprite.name);
             }
         }
     }
@@ -106,6 +104,9 @@ public class ActionManager : MonoBehaviour
     public void CreateBuildingButton(int n)//Map with Create Building Btns
     {
         //Debug.Log("1 - Click Button: " + n);
+        Unit unit = UnitSelect.instance.CurUnit;
+
+        if(unit.IsBuilder) unit.Builder.ToCreateNewBuilding(n);
     }
     #endregion
 }
