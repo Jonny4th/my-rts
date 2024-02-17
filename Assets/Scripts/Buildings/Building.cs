@@ -90,29 +90,22 @@ namespace MyGame.Core
 
         void Update()
         {
-            //test
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-                ToCreateUnit(0);
+            if(recruitList.Count == 0) return;
+            if(recruitList[0] == null) return;
 
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-                ToCreateUnit(1);
+            unitTimer += Time.deltaTime;
+            curUnitWaitTime = recruitList[0].UnitWaitTime;
 
-            if ((recruitList.Count > 0) && (recruitList[0] != null))
+            if (unitTimer >= curUnitWaitTime)
             {
-                unitTimer += Time.deltaTime;
-                curUnitWaitTime = recruitList[0].UnitWaitTime;
+                curUnitProgress++;
+                unitTimer = 0f;
 
-                if (unitTimer >= curUnitWaitTime)
+                if (curUnitProgress >= 100)
                 {
-                    curUnitProgress++;
-                    unitTimer = 0f;
-
-                    if (curUnitProgress >= 100)
-                    {
-                        curUnitProgress = 0;
-                        curUnitWaitTime = 0f;
-                        CreateUnitCompleted();
-                    }
+                    curUnitProgress = 0;
+                    curUnitWaitTime = 0f;
+                    CreateUnitCompleted();
                 }
             }
         }

@@ -2300,7 +2300,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &457922
 Transform:
   m_ObjectHideFlags: 0
@@ -2517,7 +2517,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &437096
 Transform:
   m_ObjectHideFlags: 0
@@ -5143,8 +5143,9 @@ GameObject:
   - component: {fileID: 4191647433676397667}
   - component: {fileID: 5669167237727491191}
   - component: {fileID: 7422582238111829050}
+  - component: {fileID: 4029779218132650021}
   m_Layer: 6
-  m_Name: Soldier
+  m_Name: Builder
   m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5272,9 +5273,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09f0b29852fe51444970695dd208d0af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1
-  unitName: Soldier
-  unitPic: {fileID: 21300000, guid: cb94bbac981af234bac14af1b3d7d733, type: 3}
+  id: 0
+  unitName: Builder
+  unitPic: {fileID: 21300000, guid: 5f06ed1bf9bc9bf40b9bf7af3897285a, type: 3}
   curHP: 100
   maxHP: 100
   moveSpeed: 5
@@ -5285,8 +5286,8 @@ MonoBehaviour:
   weaponRange: 0
   state: 0
   faction: {fileID: 0}
-  isBuilder: 0
-  builder: {fileID: 0}
+  isBuilder: 1
+  builder: {fileID: 4029779218132650021}
   unitCost:
     food: 50
     wood: 10
@@ -5306,6 +5307,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectionVisual: {fileID: 1605079031438591564}
+--- !u!114 &4029779218132650021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6f7ef5963aa65845a7f73dc6a89ca8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toBuild: 0
+  showGhost: 0
+  buildingList:
+  - {fileID: 5002861235866514344, guid: 1c547e7f1b6bccb4687877efea9e9320, type: 3}
+  - {fileID: 6577816806632553813, guid: 95014ee6b2a1e92468798817df1c249c, type: 3}
+  ghostBuildingList:
+  - {fileID: 5002861235866514344, guid: c19e80783c2f7ec4394b85873ef4fc08, type: 3}
+  - {fileID: 6577816806632553813, guid: f8293165580d6764197b800266522101, type: 3}
+  newBuilding: {fileID: 0}
+  ghostBuilding: {fileID: 0}
+  inProgressBuilding: {fileID: 0}
 --- !u!1 &186630
 GameObject:
   m_ObjectHideFlags: 0

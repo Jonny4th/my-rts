@@ -85,12 +85,8 @@ namespace MyGame.Core
         void Awake()
         {
             navAgent = GetComponent<NavMeshAgent>();
-        }
 
-        // Start is called before the first frame update
-        void Start()
-        {
-
+            if(IsBuilder) builder = GetComponent<Builder>();
         }
 
         // Update is called once per frame

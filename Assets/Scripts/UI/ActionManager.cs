@@ -52,9 +52,9 @@ public class ActionManager : MonoBehaviour
             {
                 unitBtns[i].gameObject.SetActive(true);
                 Unit unit = b.UnitPrefabs[i].GetComponent<Unit>();
+                Debug.Log($"{i} ui {unitBtns[i].name} name {unit.UnitPic.name} id {unit.ID}");
                 unitBtns[i].image.sprite = unit.UnitPic;
-                unitBtns[i].onClick.AddListener(() => CreateUnitButton(i));
-                Debug.Log(i);
+                Debug.Log(unitBtns[i].image.sprite.name);
             }
         }
     }
