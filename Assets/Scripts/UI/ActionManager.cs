@@ -53,6 +53,8 @@ public class ActionManager : MonoBehaviour
                 unitBtns[i].gameObject.SetActive(true);
                 Unit unit = b.UnitPrefabs[i].GetComponent<Unit>();
                 unitBtns[i].image.sprite = unit.UnitPic;
+                unitBtns[i].onClick.AddListener(() => CreateUnitButton(i));
+                Debug.Log(i);
             }
         }
     }
@@ -97,7 +99,7 @@ public class ActionManager : MonoBehaviour
     #region Button
     public void CreateUnitButton(int n)//Map with Create Unit Btns
     {
-        //Debug.Log("Create " + n);
+        Debug.Log("Create " + n);
         UnitSelect.instance.CurBuilding.ToCreateUnit(n);
     }
 
