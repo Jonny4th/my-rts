@@ -104,7 +104,6 @@ namespace MyGame.Core
 
         public void SetState(UnitState toState)
         {
-            Debug.Log(toState.ToString());
             state = toState;
 
             if (state == UnitState.Idle)
