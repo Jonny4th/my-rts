@@ -25,4 +25,26 @@ public class Builder : MonoBehaviour
     {
         unit = GetComponent<Unit>();
     }
+
+    public void ToCreateNewBuilding(int i) //Start call from ActionManager UI Btns
+    {
+        if (buildingList[i] == null)
+            return;
+
+        Building b = buildingList[i].GetComponent<Building>();
+
+        if (!unit.Faction.CheckBuildingCost(b)) return; //don't have enough resource to build
+        else
+        {
+            //Create ghost building at the mouse position
+            ghostBuilding = Instantiate(ghostBuildingList[i],
+                                        Input.mousePosition,
+                                        Quaternion.identity, unit.Faction.GhostBuildingParent);
+
+            toBuild = true;
+            newBuilding = buildingList[i]; //Set prefab into new building
+            showGhost = true;
+        }
+    }
+
 }
