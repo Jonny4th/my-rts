@@ -23,10 +23,11 @@ namespace MyGame.Core
         [SerializeField] private bool isFunctional;
         public bool IsFunctional { get { return isFunctional; } set { isFunctional = value; } }
 
-        void Start()
-        {
-            curHP = maxHP;
-        }
+        [SerializeField] private bool isHQ;
+        public bool IsHQ { get { return isHQ; } }
+
+        [SerializeField] private float intoTheGround = 5f;
+        public float IntoTheGround { get { return intoTheGround; } }
 
         public void ToCreateUnit(int i)
         {
