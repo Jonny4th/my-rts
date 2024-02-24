@@ -46,6 +46,10 @@ public class Faction : MonoBehaviour
     [SerializeField] private Transform ghostBuildingParent;
     public Transform GhostBuildingParent => ghostBuildingParent;
 
+    [SerializeField]
+    private Transform startPosition; //start position for Faction
+    public Transform StartPosition { get { return startPosition; } }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -66,16 +70,16 @@ public class Faction : MonoBehaviour
 
     public bool CheckUnitCost(Unit unit)
     {
-        if (food < unit.UnitCost.food)
+        if(food < unit.UnitCost.food)
             return false;
 
-        if (wood < unit.UnitCost.wood)
+        if(wood < unit.UnitCost.wood)
             return false;
 
-        if (gold < unit.UnitCost.gold)
+        if(gold < unit.UnitCost.gold)
             return false;
 
-        if (stone < unit.UnitCost.stone)
+        if(stone < unit.UnitCost.stone)
             return false;
 
         return true;
@@ -98,16 +102,16 @@ public class Faction : MonoBehaviour
 
     public bool CheckBuildingCost(Building building)
     {
-        if (food < building.StructureCost.food)
+        if(food < building.StructureCost.food)
             return false;
 
-        if (wood < building.StructureCost.wood)
+        if(wood < building.StructureCost.wood)
             return false;
 
-        if (gold < building.StructureCost.gold)
+        if(gold < building.StructureCost.gold)
             return false;
 
-        if (stone < building.StructureCost.stone)
+        if(stone < building.StructureCost.stone)
             return false;
 
         return true;
@@ -121,4 +125,41 @@ public class Faction : MonoBehaviour
         stone -= building.StructureCost.stone;
     }
     #endregion
+
+    public Vector3 GetHQSpawnPos()
+    {
+        var hq = aliveBuildings.Find(b => b.IsHQ);
+
+        if(hq != null) return hq.SpawnPoint.position;
+
+        //foreach(Building b in aliveBuildings)
+        //{
+        //    if(b.IsHQ)
+        //        return b.SpawnPoint.position;
+        //}
+
+        return startPosition.position;
+    }
+
+    public void GainResource(ResourceType resourceType, int amount)
+    {
+        switch(resourceType)
+        {
+            case ResourceType.Food:
+                food += amount;
+                break;
+            case ResourceType.Wood:
+                wood += amount;
+                break;
+            case ResourceType.Gold:
+                gold += amount;
+                break;
+            case ResourceType.Stone:
+                stone += amount;
+                break;
+        }
+
+        if(this == GameManager.instance.MyFaction)
+            MainUI.instance.UpdateAllResource(this);
+    }
 }
