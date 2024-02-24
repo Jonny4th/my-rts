@@ -10,6 +10,7 @@ public class ResourceManager : MonoBehaviour
 
     [SerializeField]
     private ResourceSource[] resources;
+    public ResourceSource[] Resources { get { return resources; } }
 
     public static ResourceManager instance;
 

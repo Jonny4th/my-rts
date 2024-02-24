@@ -31,6 +31,10 @@ public class Faction : MonoBehaviour
     [SerializeField] private int stone;
     public int Stone { get => stone; set => stone = value; }
 
+    [SerializeField]
+    private int newResourceRange = 50;
+
+    [Header("Own Units")]
     [SerializeField] private List<Unit> aliveUnits = new List<Unit>();
     public List<Unit> AliveUnits { get => aliveUnits; }
 
@@ -60,6 +64,13 @@ public class Faction : MonoBehaviour
     void Update()
     {
 
+    }
+
+    public Vector3 GetHQSpawnPos()
+    {
+        var hq = aliveBuildings.Find(b => b.IsHQ);
+        if(hq != null) return hq.SpawnPoint.position;
+        return startPosition.position;
     }
 
     #region Unit
@@ -126,21 +137,6 @@ public class Faction : MonoBehaviour
     }
     #endregion
 
-    public Vector3 GetHQSpawnPos()
-    {
-        var hq = aliveBuildings.Find(b => b.IsHQ);
-
-        if(hq != null) return hq.SpawnPoint.position;
-
-        //foreach(Building b in aliveBuildings)
-        //{
-        //    if(b.IsHQ)
-        //        return b.SpawnPoint.position;
-        //}
-
-        return startPosition.position;
-    }
-
     public void GainResource(ResourceType resourceType, int amount)
     {
         switch(resourceType)
@@ -162,4 +158,39 @@ public class Faction : MonoBehaviour
         if(this == GameManager.instance.MyFaction)
             MainUI.instance.UpdateAllResource(this);
     }
+
+    // gets the closest resource to the position (random between nearest 3 for some variance)
+    public ResourceSource GetClosestResource(Vector3 pos, ResourceType rType)
+    {
+        ResourceSource[] closest = new ResourceSource[2];
+        float[] closestDist = new float[2];
+
+        foreach(ResourceSource resource in ResourceManager.instance.Resources)
+        {
+            if(resource == null) continue;
+            if(resource.RsrcType != rType) continue;
+
+            float dist = Vector3.Distance(pos, resource.transform.position);
+            if(dist > newResourceRange) continue;
+
+            for(int x = 0; x < closest.Length; x++)
+            {
+                if(closest[x] == null)
+                {
+                    closest[x] = resource;
+                    closestDist[x] = dist;
+                    break;
+                }
+                else if(dist < closestDist[x])
+                {
+                    closest[x] = resource;
+                    closestDist[x] = dist;
+                    break;
+                }
+            }
+        }
+
+        return closest[UnityEngine.Random.Range(0, closest.Length)];
+    }
+
 }

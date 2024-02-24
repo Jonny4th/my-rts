@@ -40,6 +40,7 @@ public class UnitAnimation : MonoBehaviour
                 break;
             case UnitState.Move:
             case UnitState.MoveToBuild:
+            case UnitState.MoveToResource:
                 anim.SetBool("IsMove", true);
                 break;
             case UnitState.Attack:

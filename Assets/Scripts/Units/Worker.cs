@@ -54,7 +54,7 @@ namespace MyGame.Core
         }
 
         // move to a resource and begin to gather it
-        public void ToGatherResource(ResourceSource resource)
+        public void ToGatherResource(ResourceSource resource, Vector3 pos)
         {
             curResourceSource = resource;
 
@@ -68,11 +68,13 @@ namespace MyGame.Core
             unit.SetState(UnitState.MoveToResource);
 
             unit.NavAgent.isStopped = false;
-            unit.NavAgent.SetDestination(resource.transform.position);
+            unit.NavAgent.SetDestination(pos);
         }
 
         private void MoveToResourceUpdate()
         {
+            CheckForResource();
+
             if(Vector3.Distance(transform.position, unit.NavAgent.destination) <= 2f)
             {
                 if(curResourceSource == null) return;
@@ -98,9 +100,10 @@ namespace MyGame.Core
                         carryType = curResourceSource.RsrcType;
                         amountCarry += gatherAmount;
                     }
+                    else CheckForResource();
                 }
                 else //amount is full, go back to deliver at HQ
-                    unit.SetState(UnitState.DeliverToHQ);
+                unit.SetState(UnitState.DeliverToHQ);
             }
         }
 
@@ -129,6 +132,28 @@ namespace MyGame.Core
                 amountCarry = 0;
 
                 //Debug.Log("Delivered");
+            }
+
+            CheckForResource();
+        }
+
+        private void CheckForResource()
+        {
+            if(curResourceSource != null) //that resource still exists
+                ToGatherResource(curResourceSource, curResourceSource.transform.position);
+            else
+            {
+                //try to find a new resource
+                curResourceSource = unit.Faction.GetClosestResource(transform.position, carryType);
+
+                //CheckAgain, if found a new one, go to it
+                if(CurResourceSource != null)
+                    ToGatherResource(curResourceSource, curResourceSource.transform.position);
+                else //can't find a new one
+                {
+                    Debug.Log($"{unit.name} can't find a new tree");
+                    unit.SetState(UnitState.Idle);
+                }
             }
         }
     }

@@ -74,7 +74,7 @@ namespace MyGame.Core.Inputs
         private void UnitsToGatherResource(ResourceSource resource, Unit unit)
         {
             if(unit.IsWorker)
-                unit.Worker.ToGatherResource(resource);
+                unit.Worker.ToGatherResource(resource, resource.transform.position);
             else
                 unit.MoveToPosition(resource.transform.position);
         }
