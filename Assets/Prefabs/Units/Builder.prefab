@@ -5143,6 +5143,7 @@ GameObject:
   - component: {fileID: 5669167237727491191}
   - component: {fileID: 7422582238111829050}
   - component: {fileID: 4029779218132650021}
+  - component: {fileID: -8212215523560322794}
   m_Layer: 6
   m_Name: Builder
   m_TagString: Unit
@@ -5287,6 +5288,8 @@ MonoBehaviour:
   faction: {fileID: 0}
   isBuilder: 1
   builder: {fileID: 4029779218132650021}
+  isWorker: 1
+  worker: {fileID: -8212215523560322794}
   unitCost:
     food: 50
     wood: 10
@@ -5329,6 +5332,24 @@ MonoBehaviour:
   newBuilding: {fileID: 0}
   ghostBuilding: {fileID: 0}
   inProgressBuilding: {fileID: 0}
+--- !u!114 &-8212215523560322794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85c62dad4d8eff1449f9495f3d3b9a92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curResourceSource: {fileID: 0}
+  gatherRate: 0.5
+  gatherAmount: 1
+  amountCarry: 0
+  maxCarry: 25
+  carryType: 0
 --- !u!1 &186630
 GameObject:
   m_ObjectHideFlags: 0

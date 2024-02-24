@@ -34,6 +34,19 @@ namespace MyGame.Core
             unit = GetComponent<Unit>();
         }
 
+        void Update()
+        {
+            switch(unit.State)
+            {
+                case UnitState.MoveToResource:
+                    MoveToResourceUpdate();
+                    break;
+                case UnitState.Gather:
+                    GatherUpdate();
+                    break;
+            }
+        }
+
         // move to a resource and begin to gather it
         public void ToGatherResource(ResourceSource resource)
         {
@@ -50,6 +63,39 @@ namespace MyGame.Core
 
             unit.NavAgent.isStopped = false;
             unit.NavAgent.SetDestination(resource.transform.position);
+        }
+
+        private void MoveToResourceUpdate()
+        {
+            if(Vector3.Distance(transform.position, unit.NavAgent.destination) <= 2f)
+            {
+                if(curResourceSource == null) return;
+
+                unit.LookAt(curResourceSource.transform.position);
+                unit.NavAgent.isStopped = true;
+                unit.SetState(UnitState.Gather);
+            }
+        }
+
+        private void GatherUpdate()
+        {
+            if(Time.time - lastGatherTime > gatherRate)
+            {
+                lastGatherTime = Time.time;
+
+                if(amountCarry < maxCarry)
+                {
+                    if(curResourceSource != null)
+                    {
+                        curResourceSource.GatherResource(gatherAmount);
+
+                        carryType = curResourceSource.RsrcType;
+                        amountCarry += gatherAmount;
+                    }
+                }
+                else //amount is full, go back to deliver at HQ
+                    unit.SetState(UnitState.DeliverToHQ);
+            }
         }
     }
 }
