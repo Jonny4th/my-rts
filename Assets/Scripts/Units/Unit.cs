@@ -9,8 +9,12 @@ namespace MyGame.Core
         Idle,
         Move,
         Attack,
-        MoveToBuild, //builder goes to build
-        BuildProgress, //builder builds in progress
+        MoveToBuild, //Builder goes to build
+        BuildProgress, //Builder builds in progress
+        MoveToResource, //Worker
+        Gather, //Worker
+        DeliverToHQ, //Worker
+        StoreAtHQ, //Worker
         Die,
     }
 
@@ -76,6 +80,12 @@ namespace MyGame.Core
         [SerializeField] private Builder builder;
         public Builder Builder { get { return builder; } }
 
+        [SerializeField] private bool isWorker;
+        public bool IsWorker { get { return isWorker; } set { isWorker = value; } }
+
+        [SerializeField] private Worker worker;
+        public Worker Worker { get { return worker; } }
+
         [Header("Info")]
         [SerializeField] private UnitCost unitCost;
         public UnitCost UnitCost { get { return unitCost; } }
@@ -89,6 +99,7 @@ namespace MyGame.Core
             navAgent = GetComponent<NavMeshAgent>();
 
             if(IsBuilder) builder = GetComponent<Builder>();
+            if(IsWorker) worker = GetComponent<Worker>();
         }
 
         // Update is called once per frame
