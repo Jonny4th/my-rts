@@ -17,6 +17,10 @@ namespace MyGame.Core.Inputs
         private Building curBuilding;
         public Building CurBuilding { get { return curBuilding; } }
 
+        [SerializeField]
+        private ResourceSource curResource;
+        public ResourceSource CurResource { get { return curResource; } }
+
         private Selectable select;
 
         private Camera cam;
@@ -36,36 +40,57 @@ namespace MyGame.Core.Inputs
             cam = Camera.main;
             layerMask = LayerMask.GetMask("Unit", "Building", "Resource", "Ground");
 
-            if (instance != null) Destroy(this);
+            if(instance != null) Destroy(this);
             instance = this;
         }
 
         void Update()
         {
             //mouse down
-            if (Input.GetMouseButtonDown(0))
+            if(Input.GetMouseButtonDown(0))
             {
-                if (EventSystem.current.IsPointerOverGameObject()) return;
+                if(EventSystem.current.IsPointerOverGameObject()) return;
 
                 ClearEverything();
             }
 
             // mouse up
-            if (Input.GetMouseButtonUp(0))
+            if(Input.GetMouseButtonUp(0))
             {
                 TrySelect(Input.mousePosition);
             }
         }
         #endregion
 
+        private void TrySelect(Vector2 screenPos)
+        {
+            Ray ray = cam.ScreenPointToRay(screenPos);
+
+            //if we left-click something
+            if(Physics.Raycast(ray, out RaycastHit hit, 1000, layerMask))
+            {
+                switch(hit.collider.tag)
+                {
+                    case "Unit":
+                        SelectUnit(hit);
+                        break;
+                    case "Building":
+                        SelectBuilding(hit);
+                        break;
+                    case "Resource":
+                        ResourceSelect(hit);
+                        break;
+                }
+            }
+        }
+
         private void SelectUnit(RaycastHit hit)
         {
             curUnit = hit.collider.GetComponent<Unit>();
 
-            select = hit.collider.GetComponent<Selectable>();
-            select.ToggleSelectionVisual(true);
+            select = hit.collider.GetComponent<Selectable>().ToggleSelectionVisual(true);
 
-            if (GameManager.instance.MyFaction.IsMyUnit(curUnit))
+            if(GameManager.instance.MyFaction.IsMyUnit(curUnit))
             {
                 ShowUnit(curUnit);
             }
@@ -75,40 +100,29 @@ namespace MyGame.Core.Inputs
         {
             curBuilding = hit.collider.GetComponent<Building>();
 
-            select = curBuilding.SelectionVisual;
-            select.ToggleSelectionVisual(true);
+            select = curBuilding.SelectionVisual.ToggleSelectionVisual(true); ;
 
-            if (GameManager.instance.MyFaction.IsMyBuilding(curBuilding))
+            if(GameManager.instance.MyFaction.IsMyBuilding(curBuilding))
             {
                 ShowBuilding(curBuilding);//Show building info
             }
         }
 
-        private void TrySelect(Vector2 screenPos)
+        private void ResourceSelect(RaycastHit hit)
         {
-            Ray ray = cam.ScreenPointToRay(screenPos);
+            curResource = hit.collider.GetComponent<ResourceSource>();
+            if(curResource == null)
+                return;
 
-            //if we left-click something
-            if (Physics.Raycast(ray, out RaycastHit hit, 1000, layerMask))
-            {
-                switch (hit.collider.tag)
-                {
-                    case "Unit":
-                        SelectUnit(hit);
-                        break;
-                    case "Building":
-                        SelectBuilding(hit);
-                        break;
-                }
-            }
+            select = curResource.SelectionVisual.ToggleSelectionVisual(true);
+
+            ShowResource();//Show resource info
         }
 
         private void ClearAllSelectionVisual()
         {
-            if (select != null)
-                select.ToggleSelectionVisual(false);
-
             ActionManager.instance.ClearAllInfo();
+            if(select != null) select.ToggleSelectionVisual(false);
         }
 
         private void ClearEverything()
@@ -135,6 +149,11 @@ namespace MyGame.Core.Inputs
         {
             InfoManager.instance.ShowAllInfo(b);
             ActionManager.instance.ShowCreateUnitMode(b);
+        }
+
+        private void ShowResource()
+        {
+            InfoManager.instance.ShowAllInfo(curResource);//Show resource info in Info Panel
         }
     }
 }
