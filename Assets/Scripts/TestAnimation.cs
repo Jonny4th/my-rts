@@ -29,4 +29,12 @@ public class TestAnimation : MonoBehaviour
             units[i].State = UnitState.Attack;
         }
     }
+
+    public void SetChop()
+    {
+        foreach(Unit unit in units)
+        {
+            if(unit.IsWorker) unit.State = UnitState.Gather;
+        }
+    }
 }

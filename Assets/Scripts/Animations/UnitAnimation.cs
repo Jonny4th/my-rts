@@ -31,6 +31,11 @@ public class UnitAnimation : MonoBehaviour
         {
             anim.SetBool("IsBuild", false);
         }
+
+        if(unit.IsWorker)
+        {
+            anim.SetBool("IsGatherWood", false);
+        }
         //can we use trigger instead?
 
         switch(unit.State)
@@ -41,6 +46,7 @@ public class UnitAnimation : MonoBehaviour
             case UnitState.Move:
             case UnitState.MoveToBuild:
             case UnitState.MoveToResource:
+            case UnitState.DeliverToHQ:
                 anim.SetBool("IsMove", true);
                 break;
             case UnitState.Attack:
@@ -48,6 +54,9 @@ public class UnitAnimation : MonoBehaviour
                 break;
             case UnitState.BuildProgress:
                 anim.SetBool("IsBuild", true);
+                break;
+            case UnitState.Gather:
+                anim.SetBool("IsGatherWood", true);
                 break;
         }
     }

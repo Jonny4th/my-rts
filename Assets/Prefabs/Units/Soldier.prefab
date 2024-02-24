@@ -5287,12 +5287,16 @@ MonoBehaviour:
   faction: {fileID: 0}
   isBuilder: 0
   builder: {fileID: 0}
+  isWorker: 0
+  worker: {fileID: 0}
   unitCost:
     food: 50
     wood: 10
     gold: 20
     stone: 0
   unitWaitTime: 0.1
+  pathUpdateRate: 1
+  lastPathUpdateTime: 0
 --- !u!114 &7422582238111829050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6283,6 +6287,18 @@ PrefabInstance:
       value: Rifle
       objectReference: {fileID: 0}
     - target: {fileID: 460526, guid: 17184737f68650d4cbca0fe8fa46afcd, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 81.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 460526, guid: 17184737f68650d4cbca0fe8fa46afcd, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 81.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 460526, guid: 17184737f68650d4cbca0fe8fa46afcd, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 81.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 460526, guid: 17184737f68650d4cbca0fe8fa46afcd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -6321,6 +6337,10 @@ PrefabInstance:
     - target: {fileID: 460526, guid: 17184737f68650d4cbca0fe8fa46afcd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 460526, guid: 17184737f68650d4cbca0fe8fa46afcd, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
