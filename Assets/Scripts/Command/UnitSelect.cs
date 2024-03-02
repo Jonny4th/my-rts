@@ -28,6 +28,9 @@ namespace MyGame.Core.Inputs
         private Vector2 oldAnchoredPos;
         private Vector2 startPos;
 
+        [SerializeField]
+        private Unit curEnemy;
+
         private List<Selectable> select = new();
 
         private Camera cam;
@@ -111,6 +114,12 @@ namespace MyGame.Core.Inputs
                 select.Add(unit.SelectionVisual.ToggleSelectionVisual(true));
                 ShowUnit(unit);
             }
+            else
+            {
+                curEnemy = unit;
+                select.Add(curEnemy.SelectionVisual.ToggleSelectionVisual(true));
+                ShowEnemyUnit(unit);
+            }
         }
 
         private void SelectBuilding(RaycastHit hit)
@@ -162,6 +171,11 @@ namespace MyGame.Core.Inputs
             {
                 ActionManager.instance.ShowBuilderMode(u);
             }
+        }
+
+        private void ShowEnemyUnit(Unit u)
+        {
+            InfoManager.instance.ShowEnemyAllInfo(u);
         }
 
         private void ShowBuilding(Building b)

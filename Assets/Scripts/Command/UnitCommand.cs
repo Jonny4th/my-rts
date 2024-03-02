@@ -63,6 +63,9 @@ namespace MyGame.Core.Inputs
                     case "Resource":
                         ResourceCommand(hit, unitSelect.CurUnits);
                         break;
+                    case "Unit":
+                        CommandToUnit(hit, unitSelect.CurUnits);
+                        break;
                 }
             }
         }
@@ -90,6 +93,25 @@ namespace MyGame.Core.Inputs
         {
             UnitsToGatherResource(hit.collider.GetComponent<ResourceSource>(), units);
             CreateVFXMarker(hit.transform.position, MainUI.instance.SelectionMarker);
+        }
+
+        private void UnitAttackEnemy(Unit enemy, List<Unit> units)
+        {
+            foreach (Unit u in units)
+            {
+                u.ToAttackUnit(enemy);
+            }
+        }
+
+        private void CommandToUnit(RaycastHit hit, List<Unit> units)
+        {
+            Unit target = hit.collider.gameObject.GetComponent<Unit>();
+            CreateVFXMarker(hit.transform.position, MainUI.instance.SelectionMarker);
+
+            if (target == null) return;
+
+            if (target.Faction == GameManager.instance.EnemyFaction)// if it is our enemy
+                UnitAttackEnemy(target, units);
         }
     }
 }

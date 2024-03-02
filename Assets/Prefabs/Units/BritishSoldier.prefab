@@ -5144,7 +5144,7 @@ GameObject:
   - component: {fileID: 5669167237727491191}
   - component: {fileID: 7422582238111829050}
   m_Layer: 6
-  m_Name: Soldier
+  m_Name: BritishSoldier
   m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5273,7 +5273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 1
-  unitName: Soldier
+  unitName: Brit Regular
   unitPic: {fileID: 21300000, guid: cb94bbac981af234bac14af1b3d7d733, type: 3}
   curHP: 100
   maxHP: 100
@@ -5282,7 +5282,7 @@ MonoBehaviour:
   maxWpnDamage: 20
   armour: 0
   visualRange: 0
-  weaponRange: 0
+  weaponRange: 15
   state: 0
   faction: {fileID: 0}
   isBuilder: 0
@@ -5297,6 +5297,10 @@ MonoBehaviour:
   unitWaitTime: 0.1
   pathUpdateRate: 1
   lastPathUpdateTime: 0
+  selectionVisual: {fileID: 0}
+  curEnemyUnitTarget: {fileID: 0}
+  attackRate: 1
+  lastAttackTime: 0
 --- !u!114 &7422582238111829050
 MonoBehaviour:
   m_ObjectHideFlags: 0

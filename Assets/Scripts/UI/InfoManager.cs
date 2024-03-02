@@ -100,5 +100,14 @@ namespace MyGame.Core.Managers
             wpRngIcon.color = Color.clear;
             wpRngTxt.text = "";
         }
+
+        public void ShowEnemyAllInfo(Unit unit)
+        {
+            SetPic(unit.UnitPic);
+            nameTxt.text = unit.UnitName;
+
+            hpIcon.color = Color.white;
+            hpTxt.text = $"{unit.CurHP}/{unit.MaxHP}";
+        }
     }
 }

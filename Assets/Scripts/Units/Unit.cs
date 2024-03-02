@@ -1,4 +1,6 @@
+using MyGame.Core.Managers;
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,13 +10,14 @@ namespace MyGame.Core
     {
         Idle,
         Move,
-        Attack,
+        AttackUnit,
         MoveToBuild, //Builder goes to build
         BuildProgress, //Builder builds in progress
         MoveToResource, //Worker
         Gather, //Worker
         DeliverToHQ, //Worker
         StoreAtHQ, //Worker
+        MoveToEnemy,
         Die,
     }
 
@@ -106,6 +109,15 @@ namespace MyGame.Core
         private Selectable selectionVisual;
         public Selectable SelectionVisual => selectionVisual;
 
+        [SerializeField]
+        private Unit curEnemyUnitTarget;
+
+        [SerializeField]
+        private float attackRate = 1f; //how frequent this unit attacks in second
+
+        [SerializeField]
+        private float lastAttackTime;
+
         void Awake()
         {
             navAgent = GetComponent<NavMeshAgent>();
@@ -122,6 +134,12 @@ namespace MyGame.Core
             {
                 case UnitState.Move:
                     MoveUpdate();
+                    break;
+                case UnitState.MoveToEnemy:
+                    MoveToEnemyUpdate();
+                    break;
+                case UnitState.AttackUnit:
+                    AttackUpdate();
                     break;
             }
         }
@@ -167,6 +185,110 @@ namespace MyGame.Core
         public void ToggleSelctionVisual(bool show)
         {
             selectionVisual.ToggleSelectionVisual(show);
+        }
+
+        protected virtual IEnumerator DestroyObject()
+        {
+            yield return new WaitForSeconds(5f);
+            Destroy(gameObject);
+        }
+
+        // called when my health reaches zero
+        protected virtual void Die()
+        {
+            navAgent.isStopped = true;
+
+            SetState(UnitState.Die);
+
+            if (faction != null)
+                faction.AliveUnits.Remove(this);
+
+            InfoManager.instance.ClearAllInfo();
+            //Debug.Log(gameObject + " dies.");
+            StartCoroutine("DestroyObject");
+        }
+
+        // move to an enemy unit and attack them
+        public void ToAttackUnit(Unit target)
+        {
+            if (curHP <= 0 || state == UnitState.Die) return;
+            
+            curEnemyUnitTarget = target;
+            SetState(UnitState.MoveToEnemy);
+        }
+
+        // called when an enemy unit attacks us
+        public void TakeDamage(Unit enemy, int damage)
+        {
+            //I'm already dead
+            if (curHP <= 0 || state == UnitState.Die) return;
+
+            curHP -= damage;
+
+            if (curHP <= 0)
+            {
+                curHP = 0;
+                Die();
+            }
+
+            if (!IsWorker) //if this unit is not worker
+                ToAttackUnit(enemy); //always counter-attack
+        }
+
+        // called every frame the 'MoveToEnemy' state is active
+        public void MoveToEnemyUpdate()
+        {
+            // if our target is null, go idle
+            if (curEnemyUnitTarget == null)
+            {
+                SetState(UnitState.Idle);
+                return;
+            }
+
+            if (Time.time - lastPathUpdateTime > pathUpdateRate)
+            {
+                lastPathUpdateTime = Time.time;
+                navAgent.isStopped = false;
+
+                if (curEnemyUnitTarget != null)
+                    navAgent.SetDestination(curEnemyUnitTarget.transform.position);
+            }
+
+            if (Vector3.Distance(transform.position, curEnemyUnitTarget.transform.position) <= WeaponRange)
+                SetState(UnitState.AttackUnit);
+        }
+
+        // called every frame the 'Attack' state is active
+        protected void AttackUpdate()
+        {
+            // if our target is dead, go idle
+            if (curEnemyUnitTarget == null || curEnemyUnitTarget.CurHP <= 0)
+            {
+                //DisableAllWeapons();
+                SetState(UnitState.Idle);
+                return;
+            }
+
+            // if we're still moving, stop
+            if (!navAgent.isStopped)
+                navAgent.isStopped = true;
+
+            // look at the enemy
+            LookAt(curEnemyUnitTarget.transform.position);
+
+            // attack every 'attackRate' seconds
+            if (Time.time - lastAttackTime > attackRate)
+            {
+                lastAttackTime = Time.time;
+                curEnemyUnitTarget.TakeDamage(this, UnityEngine.Random.Range(minWpnDamage, maxWpnDamage + 1));
+            }
+
+            // if we're too far away, move towards the enemy
+            if (Vector3.Distance(transform.position, curEnemyUnitTarget.transform.position) > weaponRange)
+            {
+                SetState(UnitState.MoveToEnemy);
+                //Debug.Log($"{unitName} - From Attack Update");
+            }
         }
     }
 }
