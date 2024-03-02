@@ -209,11 +209,10 @@ namespace MyGame.Core.Inputs
             {
                 Vector2 unitPos = cam.WorldToScreenPoint(unit.transform.position);
 
-                if (unitPos.x > min.x && unitPos.x < max.x && unitPos.y > min.y && unitPos.y < max.y)
-                {
-                    curUnits.Add(unit);
-                    select.Add(unit.SelectionVisual.ToggleSelectionVisual(true));
-                }
+                if (unitPos.x <= min.x || unitPos.x >= max.x || unitPos.y <= min.y || unitPos.y >= max.y) continue;
+
+                curUnits.Add(unit);
+                select.Add(unit.SelectionVisual.ToggleSelectionVisual(true));
             }
             selectionBox.sizeDelta = new Vector2(0, 0); //clear Selection Box's size;
         }
