@@ -59,6 +59,9 @@ public class UnitAnimation : MonoBehaviour
             case UnitState.Gather:
                 anim.SetBool("IsGatherWood", true);
                 break;
+            case UnitState.Die:
+                anim.SetBool("IsDeath", true);
+                break;
         }
     }
 }
