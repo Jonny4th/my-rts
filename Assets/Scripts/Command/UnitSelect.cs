@@ -12,8 +12,8 @@ namespace MyGame.Core.Inputs
         private LayerMask layerMask;
 
         [SerializeField]
-        private List<Unit> curUnit = new(); //current selected multiple unit
-        public List<Unit> CurUnit { get { return curUnit; } }
+        private List<Unit> curUnits = new(); //current selected multiple unit
+        public List<Unit> CurUnits { get { return curUnits; } }
 
         [SerializeField]
         private Building curBuilding;
@@ -92,7 +92,7 @@ namespace MyGame.Core.Inputs
 
             if (GameManager.instance.MyFaction.IsMyUnit(unit))
             {
-                curUnit.Add(unit);
+                curUnits.Add(unit);
                 select.Add(unit.SelectionVisual.ToggleSelectionVisual(true));
                 ShowUnit(unit);
             }
@@ -132,7 +132,7 @@ namespace MyGame.Core.Inputs
         private void ClearEverything()
         {
             ClearAllSelectionVisual();
-            curUnit.Clear();
+            curUnits.Clear();
             curBuilding = null;
 
             InfoManager.instance.ClearAllInfo();
