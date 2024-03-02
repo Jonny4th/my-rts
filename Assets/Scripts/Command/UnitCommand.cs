@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace MyGame.Core.Inputs
 {
-    public class UnistCommand : MonoBehaviour
+    public class UnitCommand : MonoBehaviour
     {
         public LayerMask layerMask;
         private UnitSelect unitSelect;

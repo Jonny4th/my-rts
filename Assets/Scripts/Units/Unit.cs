@@ -102,6 +102,10 @@ namespace MyGame.Core
         private float lastPathUpdateTime;
         public float LastPathUpdateTime { get { return lastPathUpdateTime; } set { lastPathUpdateTime = value; } }
 
+        [SerializeField]
+        private Selectable selectVisual;
+        public Selectable SelectionVisual => selectVisual;
+
         void Awake()
         {
             navAgent = GetComponent<NavMeshAgent>();
@@ -157,6 +161,11 @@ namespace MyGame.Core
             float angle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
 
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
+        }
+
+        public void ToggleSelctionVisual(bool show)
+        {
+            selectVisual.ToggleSelectionVisual(show);
         }
     }
 }

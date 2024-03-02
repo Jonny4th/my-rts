@@ -1,4 +1,6 @@
 using MyGame.Core.Managers;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -10,8 +12,8 @@ namespace MyGame.Core.Inputs
         private LayerMask layerMask;
 
         [SerializeField]
-        private Unit curUnit; //current selected single unit
-        public Unit CurUnit { get { return curUnit; } }
+        private List<Unit> curUnit = new(); //current selected multiple unit
+        public List<Unit> CurUnit { get { return curUnit; } }
 
         [SerializeField]
         private Building curBuilding;
@@ -21,7 +23,7 @@ namespace MyGame.Core.Inputs
         private ResourceSource curResource;
         public ResourceSource CurResource { get { return curResource; } }
 
-        private Selectable select;
+        private List<Selectable> select = new();
 
         private Camera cam;
         private Faction faction;
@@ -40,22 +42,22 @@ namespace MyGame.Core.Inputs
             cam = Camera.main;
             layerMask = LayerMask.GetMask("Unit", "Building", "Resource", "Ground");
 
-            if(instance != null) Destroy(this);
+            if (instance != null) Destroy(this);
             instance = this;
         }
 
         void Update()
         {
             //mouse down
-            if(Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0))
             {
-                if(EventSystem.current.IsPointerOverGameObject()) return;
+                if (EventSystem.current.IsPointerOverGameObject()) return;
 
                 ClearEverything();
             }
 
             // mouse up
-            if(Input.GetMouseButtonUp(0))
+            if (Input.GetMouseButtonUp(0))
             {
                 TrySelect(Input.mousePosition);
             }
@@ -67,9 +69,9 @@ namespace MyGame.Core.Inputs
             Ray ray = cam.ScreenPointToRay(screenPos);
 
             //if we left-click something
-            if(Physics.Raycast(ray, out RaycastHit hit, 1000, layerMask))
+            if (Physics.Raycast(ray, out RaycastHit hit, 1000, layerMask))
             {
-                switch(hit.collider.tag)
+                switch (hit.collider.tag)
                 {
                     case "Unit":
                         SelectUnit(hit);
@@ -86,13 +88,13 @@ namespace MyGame.Core.Inputs
 
         private void SelectUnit(RaycastHit hit)
         {
-            curUnit = hit.collider.GetComponent<Unit>();
+            var unit = hit.collider.GetComponent<Unit>();
 
-            select = hit.collider.GetComponent<Selectable>().ToggleSelectionVisual(true);
-
-            if(GameManager.instance.MyFaction.IsMyUnit(curUnit))
+            if (GameManager.instance.MyFaction.IsMyUnit(unit))
             {
-                ShowUnit(curUnit);
+                curUnit.Add(unit);
+                select.Add(unit.SelectionVisual.ToggleSelectionVisual(true));
+                ShowUnit(unit);
             }
         }
 
@@ -100,9 +102,9 @@ namespace MyGame.Core.Inputs
         {
             curBuilding = hit.collider.GetComponent<Building>();
 
-            select = curBuilding.SelectionVisual.ToggleSelectionVisual(true); ;
+            select.Add(curBuilding.SelectionVisual.ToggleSelectionVisual(true));
 
-            if(GameManager.instance.MyFaction.IsMyBuilding(curBuilding))
+            if (GameManager.instance.MyFaction.IsMyBuilding(curBuilding))
             {
                 ShowBuilding(curBuilding);//Show building info
             }
@@ -111,10 +113,10 @@ namespace MyGame.Core.Inputs
         private void ResourceSelect(RaycastHit hit)
         {
             curResource = hit.collider.GetComponent<ResourceSource>();
-            if(curResource == null)
+            if (curResource == null)
                 return;
 
-            select = curResource.SelectionVisual.ToggleSelectionVisual(true);
+            select.Add(curResource.SelectionVisual.ToggleSelectionVisual(true));
 
             ShowResource();//Show resource info
         }
@@ -122,15 +124,16 @@ namespace MyGame.Core.Inputs
         private void ClearAllSelectionVisual()
         {
             ActionManager.instance.ClearAllInfo();
-            if(select != null) select.ToggleSelectionVisual(false);
+            if (select.Count == 0) return;
+            select.Select(x => x.ToggleSelectionVisual(false));
+            select.Clear();
         }
 
         private void ClearEverything()
         {
             ClearAllSelectionVisual();
-            curUnit = null;
+            curUnit.Clear();
             curBuilding = null;
-            select = null;
 
             InfoManager.instance.ClearAllInfo();
         }
@@ -139,7 +142,7 @@ namespace MyGame.Core.Inputs
         {
             InfoManager.instance.ShowAllInfo(u);
 
-            if(u.IsBuilder)
+            if (u.IsBuilder)
             {
                 ActionManager.instance.ShowBuilderMode(u);
             }
