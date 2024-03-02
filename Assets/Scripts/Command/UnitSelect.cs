@@ -23,6 +23,11 @@ namespace MyGame.Core.Inputs
         private ResourceSource curResource;
         public ResourceSource CurResource { get { return curResource; } }
 
+        [SerializeField]
+        private RectTransform selectionBox;
+        private Vector2 oldAnchoredPos;
+        private Vector2 startPos;
+
         private List<Selectable> select = new();
 
         private Camera cam;
@@ -42,6 +47,8 @@ namespace MyGame.Core.Inputs
             cam = Camera.main;
             layerMask = LayerMask.GetMask("Unit", "Building", "Resource", "Ground");
 
+            selectionBox = MainUI.instance.SelectionBox;
+
             if (instance != null) Destroy(this);
             instance = this;
         }
@@ -51,14 +58,22 @@ namespace MyGame.Core.Inputs
             //mouse down
             if (Input.GetMouseButtonDown(0))
             {
+                startPos = Input.mousePosition;
+
                 if (EventSystem.current.IsPointerOverGameObject()) return;
 
                 ClearEverything();
             }
 
+            if(Input.GetMouseButton(0))
+            {
+                UpdateSelectionBox(Input.mousePosition);
+            }
+
             // mouse up
             if (Input.GetMouseButtonUp(0))
             {
+                ReleaseSelectionBox(Input.mousePosition);
                 TrySelect(Input.mousePosition);
             }
         }
@@ -125,7 +140,8 @@ namespace MyGame.Core.Inputs
         {
             ActionManager.instance.ClearAllInfo();
             if (select.Count == 0) return;
-            select.Select(x => x.ToggleSelectionVisual(false));
+
+            select.ForEach(x => x.ToggleSelectionVisual(false));
             select.Clear();
         }
 
@@ -158,5 +174,49 @@ namespace MyGame.Core.Inputs
         {
             InfoManager.instance.ShowAllInfo(curResource);//Show resource info in Info Panel
         }
+
+        private void UpdateSelectionBox(Vector3 mousePos)
+        {
+            //Debug.Log("Mouse Pos - " + curMousePos);
+            if (!selectionBox.gameObject.activeInHierarchy && curBuilding == null)
+                selectionBox.gameObject.SetActive(true);
+
+            float width = mousePos.x - startPos.x;
+            float height = mousePos.y - startPos.y;
+
+            selectionBox.sizeDelta = new Vector2(Mathf.Abs(width), Mathf.Abs(height));
+            selectionBox.anchoredPosition = startPos + new Vector2(width / 2, height / 2);
+
+            //store old position for real unit selection
+            oldAnchoredPos = selectionBox.anchoredPosition;
+        }
+
+        private void ReleaseSelectionBox(Vector2 mousePos)
+        {
+            //Debug.Log("Step 2 - " + _doubleClickMode);
+            Vector2 min; //down-left corner
+            Vector2 max; //top-right corner
+
+            selectionBox.gameObject.SetActive(false);
+
+            min = oldAnchoredPos - (selectionBox.sizeDelta / 2);
+            max = oldAnchoredPos + (selectionBox.sizeDelta / 2);
+
+            //Debug.Log("min = " + min);
+            //Debug.Log("max = " + max);
+
+            foreach (Unit unit in GameManager.instance.MyFaction.AliveUnits)
+            {
+                Vector2 unitPos = cam.WorldToScreenPoint(unit.transform.position);
+
+                if (unitPos.x > min.x && unitPos.x < max.x && unitPos.y > min.y && unitPos.y < max.y)
+                {
+                    curUnits.Add(unit);
+                    select.Add(unit.SelectionVisual.ToggleSelectionVisual(true));
+                }
+            }
+            selectionBox.sizeDelta = new Vector2(0, 0); //clear Selection Box's size;
+        }
+
     }
 }

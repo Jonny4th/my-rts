@@ -103,12 +103,13 @@ namespace MyGame.Core
         public float LastPathUpdateTime { get { return lastPathUpdateTime; } set { lastPathUpdateTime = value; } }
 
         [SerializeField]
-        private Selectable selectVisual;
-        public Selectable SelectionVisual => selectVisual;
+        private Selectable selectionVisual;
+        public Selectable SelectionVisual => selectionVisual;
 
         void Awake()
         {
             navAgent = GetComponent<NavMeshAgent>();
+            selectionVisual = GetComponent<Selectable>();
 
             if(IsBuilder) builder = GetComponent<Builder>();
             if(IsWorker) worker = GetComponent<Worker>();
@@ -165,7 +166,7 @@ namespace MyGame.Core
 
         public void ToggleSelctionVisual(bool show)
         {
-            selectVisual.ToggleSelectionVisual(show);
+            selectionVisual.ToggleSelectionVisual(show);
         }
     }
 }
