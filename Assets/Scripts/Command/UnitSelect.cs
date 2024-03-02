@@ -132,6 +132,10 @@ namespace MyGame.Core.Inputs
             {
                 ShowBuilding(curBuilding);//Show building info
             }
+            else
+            {
+                ShowEnemyBuilding(curBuilding);
+            }
         }
 
         private void ResourceSelect(RaycastHit hit)
@@ -184,6 +188,11 @@ namespace MyGame.Core.Inputs
             ActionManager.instance.ShowCreateUnitMode(b);
         }
 
+        private void ShowEnemyBuilding(Building b)
+        {
+            InfoManager.instance.ShowEnemyAllInfo(b);
+        }
+
         private void ShowResource()
         {
             InfoManager.instance.ShowAllInfo(curResource);//Show resource info in Info Panel
@@ -230,6 +239,5 @@ namespace MyGame.Core.Inputs
             }
             selectionBox.sizeDelta = new Vector2(0, 0); //clear Selection Box's size;
         }
-
     }
 }

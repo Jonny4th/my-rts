@@ -109,5 +109,14 @@ namespace MyGame.Core.Managers
             hpIcon.color = Color.white;
             hpTxt.text = $"{unit.CurHP}/{unit.MaxHP}";
         }
+
+        public void ShowEnemyAllInfo(Building building)
+        {
+            SetPic(building.StructurePic);
+            nameTxt.text = building.StructureName;
+
+            hpIcon.color = Color.white;
+            hpTxt.text = $"{building.CurHP}/{building.MaxHP}";
+        }
     }
 }

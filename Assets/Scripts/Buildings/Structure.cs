@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using MyGame.Core.Managers;
 
 namespace MyGame.Core
 {
@@ -40,5 +41,17 @@ namespace MyGame.Core
         [SerializeField]
         protected Selectable selectionVisual;
         public Selectable SelectionVisual { get { return selectionVisual; } }
+
+        protected void Die()
+        {
+            InfoManager.instance.ClearAllInfo();
+            Destroy(gameObject);
+        }
+
+        public void TakeDamage(int damage)
+        {
+            curHP -= damage;
+            if(curHP <= 0) Die();
+        }
     }
 }

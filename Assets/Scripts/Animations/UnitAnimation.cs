@@ -51,6 +51,7 @@ public class UnitAnimation : MonoBehaviour
                 anim.SetBool("IsMove", true);
                 break;
             case UnitState.AttackUnit:
+            case UnitState.AttackBuilding:
                 anim.SetBool("IsAttack", true);
                 break;
             case UnitState.BuildProgress:
