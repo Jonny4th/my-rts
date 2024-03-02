@@ -5143,6 +5143,7 @@ GameObject:
   - component: {fileID: 4191647433676397667}
   - component: {fileID: 5669167237727491191}
   - component: {fileID: 7422582238111829050}
+  - component: {fileID: -6585673288372371953}
   m_Layer: 6
   m_Name: BritishSoldier
   m_TagString: Unit
@@ -5283,6 +5284,7 @@ MonoBehaviour:
   armour: 0
   visualRange: 0
   weaponRange: 15
+  defendRange: 30
   state: 0
   faction: {fileID: 0}
   isBuilder: 0
@@ -5314,6 +5316,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectionVisual: {fileID: 1605079031438591564}
+--- !u!114 &-6585673288372371953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27555bb5ecb9f5f46bed9cad3ad3d288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkRate: 1
 --- !u!1 &186630
 GameObject:
   m_ObjectHideFlags: 0

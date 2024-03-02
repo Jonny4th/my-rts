@@ -68,6 +68,9 @@ namespace MyGame.Core
         [SerializeField] private float weaponRange;
         public float WeaponRange { get { return weaponRange; } }
 
+        [SerializeField] private float defendRange = 30f; //the range that a unit will defensively auto-attack
+        public float DefendRange { get { return defendRange; } }
+
         [SerializeField] private UnitState state;
         public UnitState State { get { return state; } set { state = value; } }
 
@@ -117,6 +120,7 @@ namespace MyGame.Core
 
         [SerializeField]
         private float lastAttackTime;
+
 
         void Awake()
         {
