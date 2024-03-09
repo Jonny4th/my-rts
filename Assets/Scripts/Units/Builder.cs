@@ -62,8 +62,10 @@ public class Builder : MonoBehaviour
 
     public void ToCreateNewBuilding(int i) //Start call from ActionManager UI Btns
     {
+        Debug.Log($"build {i+1}");
         if (buildingList[i] == null)
             return;
+        Debug.Log($"build {i+1}");
 
         Building b = buildingList[i].GetComponent<Building>();
 

@@ -5285,6 +5285,7 @@ MonoBehaviour:
   armour: 0
   visualRange: 0
   weaponRange: 0
+  defendRange: 30
   state: 0
   faction: {fileID: 0}
   isBuilder: 1
@@ -5299,6 +5300,11 @@ MonoBehaviour:
   unitWaitTime: 0.1
   pathUpdateRate: 1
   lastPathUpdateTime: 0
+  selectionVisual: {fileID: 0}
+  curEnemyUnitTarget: {fileID: 0}
+  curEnemyBuildingTarget: {fileID: 0}
+  attackRate: 1
+  lastAttackTime: 0
 --- !u!114 &7422582238111829050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5329,9 +5335,11 @@ MonoBehaviour:
   buildingList:
   - {fileID: 5002861235866514344, guid: 1c547e7f1b6bccb4687877efea9e9320, type: 3}
   - {fileID: 6577816806632553813, guid: 95014ee6b2a1e92468798817df1c249c, type: 3}
+  - {fileID: 2851341922211992399, guid: 0fb87b21f4720454baeb8f7529e0fa6d, type: 3}
   ghostBuildingList:
   - {fileID: 5002861235866514344, guid: c19e80783c2f7ec4394b85873ef4fc08, type: 3}
   - {fileID: 6577816806632553813, guid: f8293165580d6764197b800266522101, type: 3}
+  - {fileID: 2851341922211992399, guid: a87ae6f9559cf7e4eba1f1d242394694, type: 3}
   newBuilding: {fileID: 0}
   ghostBuilding: {fileID: 0}
   inProgressBuilding: {fileID: 0}
