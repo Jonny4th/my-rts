@@ -13,20 +13,20 @@ public class ScrollablePanelSize : MonoBehaviour
     }
     private void Update()
     {
-        //UpdateScale();
+        UpdateScale();
     }
 
     public void UpdateScale()
     {
-        var point = Mathf.InverseLerp(Max.localPosition.x, Max.position.x, transform.position.x);
+        var point = Mathf.InverseLerp(Min.localPosition.x, Max.localPosition.x, transform.localPosition.x);
         transform.localScale = ScaleCurve.Evaluate(point) * Vector3.one;
     }
 
     public void GetPos()
     {
-        var point = Mathf.InverseLerp(Max.localPosition.x, Max.localPosition.x, transform.localPosition.x);
+        var point = Mathf.InverseLerp(Min.localPosition.x, Max.localPosition.x, transform.localPosition.x);
         var eva = ScaleCurve.Evaluate(point);
-        Debug.Log($"{point} / {eva}");
+        Debug.Log($"{point} / {eva}\n");
     }
 }
 

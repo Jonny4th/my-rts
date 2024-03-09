@@ -135,6 +135,23 @@ namespace MyGame.Core.Inputs
             // if it is an enemy's building
             if (building.Faction == GameManager.instance.EnemyFaction)
                 UnitAttackEnemyBuilding(building, units);
+            else
+            {
+                if (building.CurHP < building.MaxHP)
+                {
+                    HelpFixBuilding(hit.collider.gameObject, units);
+                    StartCoroutine(Formula.BlinkSelection(building.SelectionVisual.SelectionVisual));
+                }
+            }
+        }
+
+        private void HelpFixBuilding(GameObject target, List<Unit> units)
+        {
+            foreach (Unit u in units)
+            {
+                if (u.IsBuilder)
+                    u.Builder.BuilderStartFixBuilding(target);
+            }
         }
     }
 }

@@ -114,6 +114,7 @@ public class Builder : MonoBehaviour
     public void BuilderStartFixBuilding(GameObject target)
     {
         inProgressBuilding = target;
+        Debug.Log(InProgressBuilding != null);
         unit.SetState(UnitState.MoveToBuild);
     }
 

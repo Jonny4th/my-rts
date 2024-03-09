@@ -26,6 +26,12 @@ namespace MyGame.Core
         [SerializeField] private bool isHQ;
         public bool IsHQ { get { return isHQ; } }
 
+        [SerializeField] private bool isHousing;
+        public bool IsHousing { get { return isHousing; } }
+
+        [SerializeField] private bool isBarrack;
+        public bool IsBarrack { get { return isBarrack; } }
+
         [SerializeField] private float intoTheGround = 5f;
         public float IntoTheGround { get { return intoTheGround; } }
 
@@ -70,10 +76,13 @@ namespace MyGame.Core
         {
             int id = recruitList[0].ID;
 
-            if (unitPrefabs[id] == null)
+            if (faction.UnitPrefabs[id] == null)
                 return;
 
-            GameObject unitObj = Instantiate(unitPrefabs[id], spawnPoint.position, Quaternion.Euler(0f, 180f, 0f), faction.UnitsParent);
+            GameObject unitObj = Instantiate(faction.UnitPrefabs[id],
+                                             spawnPoint.position,
+                                             Quaternion.Euler(0f, 180f, 0f),
+                                             faction.UnitsParent);
 
             recruitList.RemoveAt(0);
 
