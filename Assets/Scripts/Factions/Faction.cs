@@ -107,6 +107,15 @@ public class Faction : MonoBehaviour
         return true;
     }
 
+    public bool CheckUnitCost(int id)
+    {
+        if(id >= UnitPrefabs.Length) return false;
+
+        var unit = UnitPrefabs[id].GetComponent<Unit>();
+
+        return CheckUnitCost(unit);
+    }
+
     public void DeductUnitCost(Unit unit)
     {
         food -= unit.UnitCost.food;
