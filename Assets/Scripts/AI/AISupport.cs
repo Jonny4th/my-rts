@@ -4,18 +4,23 @@ using UnityEngine;
 
 public class AISupport : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> fighters = new List<GameObject>(); //fighter
+    [SerializeField] private List<GameObject> fighters = new(); //fighter
     public List<GameObject> Fighters { get { return fighters; } }
 
-    [SerializeField] private List<GameObject> builders = new List<GameObject>(); //builder
+    [SerializeField] private List<GameObject> builders = new(); //builder
     public List<GameObject> Builders { get { return builders; } }
 
-    [SerializeField] private List<GameObject> workers = new List<GameObject>(); //worker
+    [SerializeField] private List<GameObject> workers = new(); //worker
     public List<GameObject> Workers { get { return workers; } }
 
     [SerializeField] private List<GameObject> hq = new();
     public List<GameObject> Hq { get {  return hq; } }
 
+    [SerializeField] private List<GameObject> houses = new();
+    public List<GameObject> Houses { get {  return houses; } }
+
+    [SerializeField] private List<GameObject> barracks = new();
+    public List<GameObject> Barracks { get {  return barracks; } }
 
     [SerializeField] private Faction faction;
     public Faction Faction { get { return faction; } }
@@ -34,6 +39,8 @@ public class AISupport : MonoBehaviour
 
         foreach (Unit u in faction.AliveUnits)
         {
+            if(u.gameObject == null) continue;
+
             if (u.IsBuilder) //if it is a builder
                 builders.Add(u.gameObject);
 
@@ -42,6 +49,19 @@ public class AISupport : MonoBehaviour
 
             if (!u.IsBuilder && !u.IsWorker) //if it is a fighter
                 fighters.Add(u.gameObject);
+        }
+
+        hq.Clear();
+        houses.Clear();
+        barracks.Clear();
+
+        foreach(var b in faction.AliveBuildings)
+        {
+            if(b == null) continue;
+
+            if(b.IsHQ) hq.Add(b.gameObject);
+            if(b.IsHousing) houses.Add(b.gameObject);
+            if(b.IsBarrack) barracks.Add(b.gameObject);
         }
     }
 }

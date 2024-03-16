@@ -79,7 +79,7 @@ public class Faction : MonoBehaviour
 
     public Vector3 GetHQSpawnPos()
     {
-        var hq = aliveBuildings.Find(b => b.IsHQ);
+        var hq = aliveBuildings.Find(b => b != null && b.IsHQ);
         if(hq != null) return hq.SpawnPoint.position;
         return startPosition.position;
     }
