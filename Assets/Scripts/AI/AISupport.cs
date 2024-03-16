@@ -13,6 +13,10 @@ public class AISupport : MonoBehaviour
     [SerializeField] private List<GameObject> workers = new List<GameObject>(); //worker
     public List<GameObject> Workers { get { return workers; } }
 
+    [SerializeField] private List<GameObject> hq = new();
+    public List<GameObject> Hq { get {  return hq; } }
+
+
     [SerializeField] private Faction faction;
     public Faction Faction { get { return faction; } }
 
