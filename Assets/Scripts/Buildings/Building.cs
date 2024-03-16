@@ -118,7 +118,7 @@ namespace MyGame.Core
                 curUnitProgress++;
                 unitTimer = 0f;
 
-                if (curUnitProgress >= 100)
+                if (curUnitProgress >= 100 && (faction.AliveUnits.Count < faction.UnitLimit))
                 {
                     curUnitProgress = 0;
                     curUnitWaitTime = 0f;
@@ -137,6 +137,21 @@ namespace MyGame.Core
                     num++;
             }
             return num;
+        }
+
+        protected override void Die()
+        {
+            if(faction != null)
+            {
+                faction.AliveBuildings.Remove(this);
+            }
+
+            if(IsHousing)
+            {
+                faction.UpdateHousingLimit();
+            }
+
+            base.Die();
         }
     }
 }

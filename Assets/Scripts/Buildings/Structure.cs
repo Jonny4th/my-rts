@@ -42,7 +42,7 @@ namespace MyGame.Core
         protected Selectable selectionVisual;
         public Selectable SelectionVisual { get { return selectionVisual; } }
 
-        protected void Die()
+        protected virtual void Die()
         {
             InfoManager.instance.ClearAllInfo();
             Destroy(gameObject);
