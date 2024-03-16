@@ -6118,6 +6118,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 2070905447}
     m_Modifications:
     - target: {fileID: 507621588477163035, guid: c20d41f51a088854a83a502f28774d74, type: 3}
+      propertyPath: faction
+      value: 
+      objectReference: {fileID: 2070905448}
+    - target: {fileID: 507621588477163035, guid: c20d41f51a088854a83a502f28774d74, type: 3}
       propertyPath: isFunctional
       value: 1
       objectReference: {fileID: 0}
@@ -8612,6 +8616,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3113077195142077348, guid: ff9b0b4cac1d6144e90456e7cf7ca32c, type: 3}
+      propertyPath: faction
+      value: 
+      objectReference: {fileID: 2070905448}
     - target: {fileID: 3113077195142077348, guid: ff9b0b4cac1d6144e90456e7cf7ca32c, type: 3}
       propertyPath: isFunctional
       value: 1
