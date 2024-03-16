@@ -54,6 +54,7 @@ public class FactionAI : MonoBehaviour
         }
 
         UpdateImportantBuilding();
+        WorkerFindResource(ResourceType.Wood, 3);
     }
 
     private void UpdateImportantBuilding()
@@ -68,6 +69,33 @@ public class FactionAI : MonoBehaviour
 
             if (b.IsBarrack)
                 curBarrack = b;
+        }
+    }
+
+    private void WorkerFindResource(ResourceType rType, int n)
+    {
+        foreach (GameObject workerObj in support.Workers)
+        {
+            Unit u = workerObj.GetComponent<Unit>();
+
+            if (u.State == UnitState.Idle) //he's idle
+            {
+                ResourceSource r = faction.GetClosestResource(u.transform.position, rType);
+
+                if (r == null)
+                    continue;
+
+                u.Worker.ToGatherResource(r, r.transform.position);
+                n--;
+            }
+            else if (u.Worker.CurResourceSource != null) //he's has a job
+            {
+                if (u.Worker.CurResourceSource.RsrcType == rType) //he is already gathering this kind of resource
+                    n--;
+            }
+
+            if (n == 0)
+                break;
         }
     }
 }
