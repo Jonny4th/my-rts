@@ -1,6 +1,4 @@
 using MyGame.Core;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AICreateHouse : AICreateHQ
@@ -46,5 +44,4 @@ public class AICreateHouse : AICreateHQ
 
         return 0;
     }
-
 }
