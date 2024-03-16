@@ -26,7 +26,7 @@ public class AISupport : MonoBehaviour
     public Faction Faction { get { return faction; } }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         faction = GetComponent<Faction>();
     }
