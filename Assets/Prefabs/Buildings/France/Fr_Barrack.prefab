@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4561574690283886663
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8975680071178062561}
+  m_Layer: 7
+  m_Name: RallyPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8975680071178062561
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4561574690283886663}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 12.72}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1038496054510212540}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5440059143117325053
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,6 +265,8 @@ Transform:
   m_Children:
   - {fileID: 6990265111682857129}
   - {fileID: 7759649229008636947}
+  - {fileID: 9170340547205707641}
+  - {fileID: 8975680071178062561}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &6680891281369419702
@@ -294,9 +327,9 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 10.65, y: 6.69, z: 8.05}
+  m_Extents: {x: 10.65, y: 8.47, z: 8.05}
   m_MoveThreshold: 0.1
-  m_Carve: 0
+  m_Carve: 1
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 6.1, z: 0}
   m_TimeToStationary: 0.5
@@ -323,8 +356,8 @@ MonoBehaviour:
     gold: 50
     stone: 100
   selectionVisual: {fileID: 1644882825499540334}
-  spawnPoint: {fileID: 0}
-  rallyPoint: {fileID: 0}
+  spawnPoint: {fileID: 9170340547205707641}
+  rallyPoint: {fileID: 8975680071178062561}
   unitPrefabs:
   - {fileID: 186328, guid: a7c14d10f5f1bba469892db01a9b73ed, type: 3}
   recruitList: []
@@ -335,7 +368,7 @@ MonoBehaviour:
   isHQ: 0
   isHousing: 0
   isBarrack: 1
-  intoTheGround: 12
+  intoTheGround: 7
   waitTime: 0.5
 --- !u!114 &1644882825499540334
 MonoBehaviour:
@@ -350,6 +383,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectionVisual: {fileID: 301032291599651095}
+--- !u!1 &8866839239430600915
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9170340547205707641}
+  m_Layer: 7
+  m_Name: SpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9170340547205707641
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8866839239430600915}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 10.08}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1038496054510212540}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &34520699780019171
 PrefabInstance:
   m_ObjectHideFlags: 0
