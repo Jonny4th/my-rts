@@ -80,6 +80,9 @@ namespace MyGame.Core.Inputs
             if (Input.GetMouseButtonUp(0))
             {
                 ReleaseSelectionBox(Input.mousePosition);
+
+                if (IsPointerOverUIObject()) return;
+
                 TrySelect(Input.mousePosition);
             }
 
@@ -268,6 +271,16 @@ namespace MyGame.Core.Inputs
                 select.Add(unit.SelectionVisual.ToggleSelectionVisual(true));
             }
             selectionBox.sizeDelta = new Vector2(0, 0); //clear Selection Box's size;
+        }
+
+        //When Touching UI
+        private bool IsPointerOverUIObject()
+        {
+            PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+            eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            List<RaycastResult> results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+            return results.Count > 0;
         }
     }
 }
