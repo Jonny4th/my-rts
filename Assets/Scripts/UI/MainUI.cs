@@ -28,23 +28,15 @@ public class MainUI : MonoBehaviour
 
     public static MainUI instance;
 
+    private Canvas canvas;
+
     private void Awake()
     {
         if (instance == null)
             instance = this;
         else Destroy(gameObject);
-    }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        canvas = GetComponent<Canvas>();
     }
 
     public void UpdateAllResource(Faction faction)
@@ -56,4 +48,14 @@ public class MainUI : MonoBehaviour
         stoneText.text = faction.Stone.ToString();
     }
 
+    public Vector3 ScalePosition(Vector3 pos)
+    {
+        Vector3 newPos;
+
+        newPos = new Vector3(pos.x * canvas.transform.localScale.x,
+                             pos.y * canvas.transform.localScale.y,
+                             pos.z * canvas.transform.localScale.z);
+
+        return newPos;
+    }
 }

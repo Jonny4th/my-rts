@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7788225336200732983}
   - component: {fileID: 4050672496715084885}
   - component: {fileID: 2676035297560762504}
+  - component: {fileID: -5881047846931961005}
   m_Layer: 2
   m_Name: Br_House_Ghost
   m_TagString: GhostBuilding
@@ -112,6 +113,18 @@ MonoBehaviour:
   - {fileID: 8566156533320195389}
   - {fileID: 4833319454838828633}
   planeRdr: {fileID: 7096696762260693217}
+--- !u!114 &-5881047846931961005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6577816806632553813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6350d4ebbf8e4c4469dcf3fd9a6bcc7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9005493244440772012
 GameObject:
   m_ObjectHideFlags: 0

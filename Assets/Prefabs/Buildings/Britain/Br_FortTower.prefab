@@ -50,6 +50,7 @@ GameObject:
   - component: {fileID: 1304873803949474293}
   - component: {fileID: 9074000360713677776}
   - component: {fileID: 639640126613343122}
+  - component: {fileID: -8904979945033130724}
   m_Layer: 7
   m_Name: Br_FortTower
   m_TagString: Building
@@ -197,6 +198,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectionVisual: {fileID: 6309463910110001192}
+--- !u!114 &-8904979945033130724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2851341922211992399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6350d4ebbf8e4c4469dcf3fd9a6bcc7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &501919552106126929
 PrefabInstance:
   m_ObjectHideFlags: 0

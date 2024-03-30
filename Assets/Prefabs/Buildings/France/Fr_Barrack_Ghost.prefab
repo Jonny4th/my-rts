@@ -316,6 +316,7 @@ GameObject:
   - component: {fileID: 6680891281369419702}
   - component: {fileID: 7659413198022817836}
   - component: {fileID: 6587670584103867749}
+  - component: {fileID: 7436072915344852230}
   m_Layer: 2
   m_Name: Fr_Barrack_Ghost
   m_TagString: GhostBuilding
@@ -570,6 +571,18 @@ MonoBehaviour:
   - {fileID: 2729808796173186074}
   - {fileID: 7211413327801524881}
   planeRdr: {fileID: 4469948523390128283}
+--- !u!114 &7436072915344852230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6055712833965593278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6350d4ebbf8e4c4469dcf3fd9a6bcc7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &34520699780019171
 PrefabInstance:
   m_ObjectHideFlags: 0

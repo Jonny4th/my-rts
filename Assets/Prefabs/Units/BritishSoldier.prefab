@@ -5144,6 +5144,7 @@ GameObject:
   - component: {fileID: 5669167237727491191}
   - component: {fileID: 7422582238111829050}
   - component: {fileID: -6585673288372371953}
+  - component: {fileID: 1024940292834757583}
   m_Layer: 6
   m_Name: BritishSoldier
   m_TagString: Unit
@@ -5301,6 +5302,7 @@ MonoBehaviour:
   lastPathUpdateTime: 0
   selectionVisual: {fileID: 0}
   curEnemyUnitTarget: {fileID: 0}
+  curEnemyBuildingTarget: {fileID: 0}
   attackRate: 1
   lastAttackTime: 0
 --- !u!114 &7422582238111829050
@@ -5329,6 +5331,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkRate: 1
+--- !u!114 &1024940292834757583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6350d4ebbf8e4c4469dcf3fd9a6bcc7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &186630
 GameObject:
   m_ObjectHideFlags: 0

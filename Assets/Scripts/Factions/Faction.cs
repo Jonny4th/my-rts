@@ -235,4 +235,19 @@ public class Faction : MonoBehaviour
 
         if(this == GameManager.instance.MyFaction) MainUI.instance.UpdateAllResource(this);
     }
+
+    public Color GetNationColor()
+    {
+        return nation switch
+        {
+            Nation.Neutral => Color.white,
+            Nation.Britain => Color.red,
+            Nation.Pirates => Color.black,
+            Nation.France => Color.blue,
+            Nation.Spain => Color.yellow,
+            Nation.Portugal => Color.green,
+            Nation.Netherland => (Color)new Color32(255, 157, 0, 255),
+            _ => Color.white,
+        };
+    }
 }
