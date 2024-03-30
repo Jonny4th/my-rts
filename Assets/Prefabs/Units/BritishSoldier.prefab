@@ -5283,7 +5283,7 @@ MonoBehaviour:
   minWpnDamage: 10
   maxWpnDamage: 20
   armour: 0
-  visualRange: 0
+  visualRange: 60
   weaponRange: 15
   defendRange: 30
   state: 0

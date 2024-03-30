@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class MiniMapBlip : MonoBehaviour
 {
     private GameObject blip;
-    private GameObject Blip => blip;
+    public GameObject Blip => blip;
 
     Unit unit;
     Building building;

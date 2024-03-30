@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 
     //All factions in this game (2 factions for now)
     [SerializeField] private Faction[] factions;
+    public Faction[] Factions => factions;
 
     public static GameManager instance;
 
